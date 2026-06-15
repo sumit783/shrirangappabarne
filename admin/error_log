@@ -1,0 +1,94 @@
+[06-Jun-2026 05:05:00 UTC] PHP Warning:  move_uploaded_file(../uploads/news/Screenshot (1).png): Failed to open stream: No such file or directory in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 20
+[06-Jun-2026 05:05:00 UTC] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpZc9TZc' to '../uploads/news/Screenshot (1).png' in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 20
+[06-Jun-2026 05:18:27 UTC] PHP Warning:  move_uploaded_file(../uploads/news/Screenshot (1).png): Failed to open stream: No such file or directory in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 20
+[06-Jun-2026 05:18:27 UTC] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpeVjHmV' to '../uploads/news/Screenshot (1).png' in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 20
+[06-Jun-2026 05:18:58 UTC] PHP Warning:  move_uploaded_file(../uploads/news/Screenshot (1).png): Failed to open stream: No such file or directory in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 20
+[06-Jun-2026 05:18:58 UTC] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpd57JFX' to '../uploads/news/Screenshot (1).png' in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 20
+[06-Jun-2026 07:12:15 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 07:12:31 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 07:14:07 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 07:22:14 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 07:43:59 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 07:45:54 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 07:51:02 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'प�\008Dरकल�\008Dपाच�\008Dया �...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 07:56:12 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 08:00:10 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'प�\008Dरकल�\008Dपाच�\008Dया �...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 08:02:48 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'प�\008Dरकल�\008Dपाच�\008Dया �...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 08:07:18 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवे
+कर�\008Dजत नव�...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 08:08:14 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'प�\008Dरकल�\008Dपाच�\008Dया �...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 08:15:24 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'पनवेल-कर�\008Dजत नव...' at line 2 in /home/j8avpyutdg5k/public_html/admin/add-news.php:26
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/add-news.php(26): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/add-news.php on line 26
+[06-Jun-2026 10:40:21 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'website_news.posts' doesn't exist in /home/j8avpyutdg5k/public_html/admin/dashboard.php:10
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/dashboard.php(10): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/dashboard.php on line 10
+[06-Jun-2026 10:40:31 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'website_news.posts' doesn't exist in /home/j8avpyutdg5k/public_html/admin/dashboard.php:10
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/dashboard.php(10): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/dashboard.php on line 10
+[06-Jun-2026 10:44:08 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'website_news.posts' doesn't exist in /home/j8avpyutdg5k/public_html/admin/dashboard.php:10
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/dashboard.php(10): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/dashboard.php on line 10
+[06-Jun-2026 10:46:12 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'website_news.posts' doesn't exist in /home/j8avpyutdg5k/public_html/admin/check-error.php:17
+Stack trace:
+#0 /home/j8avpyutdg5k/public_html/admin/check-error.php(17): mysqli_query()
+#1 {main}
+  thrown in /home/j8avpyutdg5k/public_html/admin/check-error.php on line 17
+[06-Jun-2026 10:56:11 UTC] PHP Warning:  move_uploaded_file(../uploads/posts/pavana.jpg): Failed to open stream: No such file or directory in /home/j8avpyutdg5k/public_html/admin/add-post.php on line 25
+[06-Jun-2026 10:56:11 UTC] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpuC27zD' to '../uploads/posts/pavana.jpg' in /home/j8avpyutdg5k/public_html/admin/add-post.php on line 25

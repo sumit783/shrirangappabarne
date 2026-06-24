@@ -20,6 +20,11 @@ interface NewsItem {
   created_at: string;
 }
 
+interface CategoryItem {
+  key: string;
+  label: string;
+}
+
 function formatDate(dateStr: string | null, lang: "mr" | "en"): string {
   if (!dateStr) return "";
   const d = new Date(dateStr);
@@ -105,18 +110,25 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
 export default function NewsPage() {
   const { lang } = useT();
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
   const [activeTab, setActiveTab] = useState("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   // Debounce search input
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(search), 450);
     return () => clearTimeout(t);
   }, [search]);
+
+  // Reset page when search or tab changes
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch, activeTab]);
 
   // Fetch categories
   useEffect(() => {
@@ -125,7 +137,14 @@ export default function NewsPage() {
         if (!res.ok) throw new Error("Failed to fetch categories");
         return res.json();
       })
-      .then((data: { categories: string[] }) => setCategories(data.categories || []))
+      .then((data: { categories: CategoryItem[] | string[] }) => {
+        const cats = data.categories || [];
+        if (cats.length > 0 && typeof cats[0] === "string") {
+          setCategories((cats as string[]).map(c => ({ key: c, label: c })));
+        } else {
+          setCategories(cats as CategoryItem[]);
+        }
+      })
       .catch((err) => console.error("Error categories:", err));
   }, [lang]);
 
@@ -136,37 +155,40 @@ export default function NewsPage() {
     try {
       const url = new URL(`${API_BASE}/api/news/by-category`);
       url.searchParams.set("lang", lang);
+      url.searchParams.set("page", page.toString());
+      url.searchParams.set("limit", "9");
+      
       if (activeTab !== "all") {
         url.searchParams.set("category", activeTab);
+      }
+      if (debouncedSearch) {
+        url.searchParams.set("search", debouncedSearch);
       }
       
       const res = await fetch(url.toString());
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      let data: NewsItem[] = await res.json();
+      let responseData = await res.json();
       
-      // Filter clientside if search term is active
-      if (debouncedSearch) {
-        const query = debouncedSearch.toLowerCase();
-        data = data.filter(item => 
-          item.title.toLowerCase().includes(query) || 
-          (item.description && item.description.toLowerCase().includes(query))
-        );
+      if (responseData && 'data' in responseData) {
+        setNewsList(responseData.data);
+        setTotalPages(responseData.totalPages || 1);
+      } else {
+        setNewsList(Array.isArray(responseData) ? responseData : []);
+        setTotalPages(1);
       }
-      
-      setNewsList(data);
     } catch (err) {
       setError(lang === "mr" ? "घडामोडी लोड करण्यात त्रुटी आली." : "Failed to load news articles.");
     } finally {
       setLoading(false);
     }
-  }, [activeTab, debouncedSearch, lang]);
+  }, [activeTab, debouncedSearch, lang, page]);
 
   useEffect(() => {
     fetchNews();
   }, [fetchNews]);
 
   const allLabel = lang === "mr" ? "सर्व घडामोडी" : "All Updates";
-  const tabsList = [{ key: "all", label: allLabel }, ...categories.map(cat => ({ key: cat, label: cat }))];
+  const tabsList = [{ key: "all", label: allLabel }, ...categories];
 
   return (
     <div className="bg-background min-h-screen flex flex-col">
@@ -190,7 +212,7 @@ export default function NewsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-black font-display tracking-tight text-white"
           >
-            {lang === "mr" ? "बातम्या आणि प्रसिद्धी पत्रके" : "Press & Media Archive"}
+            {lang === "mr" ? "बातम्या आणि घडामोडी" : "Development Works & Press"}
           </motion.h1>
 
           <motion.p
@@ -292,7 +314,7 @@ export default function NewsPage() {
           {!loading && !error && newsList.length > 0 && (
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeTab + debouncedSearch}
+                key={activeTab + debouncedSearch + page}
                 className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
               >
                 {newsList.map((item, i) => (
@@ -300,6 +322,29 @@ export default function NewsPage() {
                 ))}
               </motion.div>
             </AnimatePresence>
+          )}
+
+          {/* Pagination */}
+          {!loading && !error && totalPages > 1 && (
+            <div className="mt-12 flex justify-center items-center gap-4">
+              <button
+                onClick={() => setPage(p => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="px-4 py-2 rounded-full border border-border bg-card text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary transition-colors"
+              >
+                {lang === "mr" ? "मागे" : "Previous"}
+              </button>
+              <span className="text-sm font-medium text-muted-foreground">
+                {lang === "mr" ? `पृष्ठ ${page} पैकी ${totalPages}` : `Page ${page} of ${totalPages}`}
+              </span>
+              <button
+                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="px-4 py-2 rounded-full border border-border bg-card text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary transition-colors"
+              >
+                {lang === "mr" ? "पुढे" : "Next"}
+              </button>
+            </div>
           )}
         </div>
       </main>

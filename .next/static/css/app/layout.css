@@ -2214,6 +2214,9 @@
   .border-\(--color-border\) {
     border-color: var(--color-border);
   }
+  .border-border {
+    border-color: var(--border);
+  }
   .border-border\/50 {
     border-color: var(--border);
     @supports (color: color-mix(in lab, red, red)) {
@@ -3819,6 +3822,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--saffron);
+      }
+    }
+  }
+  .hover\:bg-secondary {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--secondary);
       }
     }
   }

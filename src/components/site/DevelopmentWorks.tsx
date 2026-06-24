@@ -18,6 +18,11 @@ interface NewsItem {
   created_at: string;
 }
 
+interface CategoryItem {
+  key: string;
+  label: string;
+}
+
 function formatDate(dateStr: string | null, lang: "mr" | "en"): string {
   if (!dateStr) return "";
   const d = new Date(dateStr);
@@ -31,7 +36,7 @@ function formatDate(dateStr: string | null, lang: "mr" | "en"): string {
 export function DevelopmentWorks() {
   const { lang } = useT();
   const [activeTab, setActiveTab] = useState("all");
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,8 +48,13 @@ export function DevelopmentWorks() {
         if (!res.ok) throw new Error("Failed to load categories");
         return res.json();
       })
-      .then((data: { categories: string[] }) => {
-        setCategories(data.categories || []);
+      .then((data: { categories: CategoryItem[] | string[] }) => {
+        const cats = data.categories || [];
+        if (cats.length > 0 && typeof cats[0] === "string") {
+          setCategories((cats as string[]).map(c => ({ key: c, label: c })));
+        } else {
+          setCategories(cats as CategoryItem[]);
+        }
       })
       .catch((err) => {
         console.error("Error loading news categories:", err);
@@ -83,8 +93,12 @@ export function DevelopmentWorks() {
 
   // Tabs layout
   const allLabel = lang === "mr" ? "सर्व घडामोडी" : "All Updates";
-  const uniqueCategories = Array.from(new Set(categories));
-  const tabsList = [{ key: "all", label: allLabel }, ...uniqueCategories.map(cat => ({ key: cat, label: cat }))];
+  const uniqueMap = new Map<string, CategoryItem>();
+  categories.forEach(c => {
+    if (!uniqueMap.has(c.key)) uniqueMap.set(c.key, c);
+  });
+  const uniqueCategories = Array.from(uniqueMap.values());
+  const tabsList = [{ key: "all", label: allLabel }, ...uniqueCategories];
 
   // Featured and regular split
   const featuredItem = newsList[0];

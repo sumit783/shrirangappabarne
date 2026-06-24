@@ -11,7 +11,7 @@ export function SocialMedia() {
       <div className="container-x">
         {/* Elfsight platform script loaded once for the page */}
         <Script
-          src="https://static.elfsight.com/platform/platform.js"
+          src="https://elfsightcdn.com/platform.js"
           strategy="afterInteractive"
           defer
         />
@@ -106,7 +106,7 @@ export function SocialMedia() {
               </div>
               <div className="fty-content">
                 <div
-                  className="elfsight-app-2fd4f9ff-54c4-48f0-a4ec-9dd5cfad0590"
+                  className="elfsight-app-4bd9234d-13da-41b6-91cd-a5ab83d4cb69"
                   data-elfsight-app-lazy="true"
                 ></div>
               </div>

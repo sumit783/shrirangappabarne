@@ -36,8 +36,8 @@ export default function Home() {
         <Hero />
         <InfoCard />
         <About />
-        <VisionMission />
         <DevelopmentWorks />
+        <VisionMission />
         {/* <Constituency /> */}
         <Gallery />
         <SocialMedia />

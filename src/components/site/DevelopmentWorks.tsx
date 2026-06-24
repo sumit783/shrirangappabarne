@@ -159,15 +159,27 @@ export function DevelopmentWorks() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-xl aspect-[16/10] bg-secondary/30 flex-shrink-0">
                   {featuredItem.image ? (
-                    <img
-                      src={`${API_BASE}${featuredItem.image}`}
-                      alt={featuredItem.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://placehold.co/800x500/1a2754/f97316?text=Shrirang+Appa+Barne";
-                      }}
-                    />
+                    featuredItem.image.match(/\.(mp4|webm|ogg|mov)$/i) || featuredItem.image.includes("video") ? (
+                      <video
+                        src={`${API_BASE}${featuredItem.image}`}
+                        className="w-full h-full object-cover"
+                        controls
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                    ) : (
+                      <img
+                        src={`${API_BASE}${featuredItem.image}`}
+                        alt={featuredItem.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = "https://placehold.co/800x500/1a2754/f97316?text=Shrirang+Appa+Barne";
+                        }}
+                      />
+                    )
                   ) : (
                     <div className="w-full h-full bg-navy/10 flex items-center justify-center text-navy font-display font-black">
                       {featuredItem.category.toUpperCase()}
@@ -230,15 +242,26 @@ export function DevelopmentWorks() {
                         {/* Small Image Container */}
                         <div className="relative overflow-hidden rounded-lg w-28 sm:w-44 bg-secondary/30 flex-shrink-0 min-h-[5rem]">
                           {m.image ? (
-                            <img
-                              src={`${API_BASE}${m.image}`}
-                              alt={m.title}
-                              loading="lazy"
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src = "https://placehold.co/150x100/1a2754/f97316?text=News";
-                              }}
-                            />
+                            m.image.match(/\.(mp4|webm|ogg|mov)$/i) || m.image.includes("video") ? (
+                              <video
+                                src={`${API_BASE}${m.image}`}
+                                className="w-full h-full object-cover"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                              />
+                            ) : (
+                              <img
+                                src={`${API_BASE}${m.image}`}
+                                alt={m.title}
+                                loading="lazy"
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = "https://placehold.co/150x100/1a2754/f97316?text=News";
+                                }}
+                              />
+                            )
                           ) : (
                             <div className="w-full h-full bg-navy/10 flex items-center justify-center text-[10px] text-navy font-bold">
                               {m.category}

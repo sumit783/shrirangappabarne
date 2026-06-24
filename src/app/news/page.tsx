@@ -8,7 +8,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { useT } from "@/lib/i18n";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 interface NewsItem {
   id: number;
@@ -44,15 +44,26 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
     >
       {/* Cover image */}
       <div className="relative h-52 overflow-hidden bg-secondary/30">
-        <img
-          src={item.image ? `${API_BASE}${item.image}` : placeholder}
-          alt={item.title}
-          loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = placeholder;
-          }}
-        />
+        {item.image && (item.image.match(/\.(mp4|webm|ogg|mov)$/i) || item.image.includes("video")) ? (
+          <video
+            src={`${API_BASE}${item.image}`}
+            className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img
+            src={item.image ? `${API_BASE}${item.image}` : placeholder}
+            alt={item.title}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = placeholder;
+            }}
+          />
+        )}
         <span className="absolute top-4 left-4 bg-saffron text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           {item.category}
         </span>

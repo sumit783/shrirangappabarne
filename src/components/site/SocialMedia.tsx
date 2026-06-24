@@ -10,11 +10,7 @@ export function SocialMedia() {
     <section id="social" className="py-24 md:py-32 bg-secondary/40">
       <div className="container-x">
         {/* Elfsight platform script loaded once for the page */}
-        <Script
-          src="https://elfsightcdn.com/platform.js"
-          strategy="afterInteractive"
-          defer
-        />
+        <Script src="https://elfsightcdn.com/platform.js" strategy="afterInteractive" defer />
 
         <div className="text-center max-w-2xl mx-auto">
           <span className="inline-block bg-saffron/10 text-saffron px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">

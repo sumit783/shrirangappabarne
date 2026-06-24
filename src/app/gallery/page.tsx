@@ -29,7 +29,9 @@ export default function GalleryPage() {
     setError(null);
     fetch(`${API_BASE}/api/images/`)
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to load gallery images");
+        if (!res.ok) {
+          return Promise.reject("Failed to load gallery images");
+        }
         return res.json();
       })
       .then((data: DBImage[]) => {
@@ -39,7 +41,7 @@ export default function GalleryPage() {
         setError(
           lang === "mr"
             ? "छायाचित्रे लोड करण्यात अडचण आली."
-            : "Failed to load gallery images. Please try again."
+            : "Failed to load gallery images. Please try again.",
         );
       })
       .finally(() => setLoading(false));
@@ -134,7 +136,8 @@ export default function GalleryPage() {
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://placehold.co/500x500/1a2754/f97316?text=Gallery";
+                      (e.target as HTMLImageElement).src =
+                        "https://placehold.co/500x500/1a2754/f97316?text=Gallery";
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">

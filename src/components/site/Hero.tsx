@@ -33,14 +33,17 @@ export function Hero() {
     // Fetch dynamic hero images
     fetch(`${API_BASE}/api/images/hero`)
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch hero images");
+        if (!res.ok) {
+          console.warn("Hero API is unavailable, using static fallback images");
+          return [];
+        }
         return res.json();
       })
       .then((data: DBImage[]) => {
         const dbSlides = (data || [])
-          .filter(item => item.image)
-          .map(item => `${API_BASE}${item.image}`);
-        
+          .filter((item) => item.image)
+          .map((item) => `${API_BASE}${item.image}`);
+
         // Combine static frontend slides first, then dynamic ones
         setSlides([...staticSlides, ...dbSlides]);
       })

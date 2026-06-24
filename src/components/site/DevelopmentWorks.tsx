@@ -51,7 +51,7 @@ export function DevelopmentWorks() {
       .then((data: { categories: CategoryItem[] | string[] }) => {
         const cats = data.categories || [];
         if (cats.length > 0 && typeof cats[0] === "string") {
-          setCategories((cats as string[]).map(c => ({ key: c, label: c })));
+          setCategories((cats as string[]).map((c) => ({ key: c, label: c })));
         } else {
           setCategories(cats as CategoryItem[]);
         }
@@ -71,16 +71,14 @@ export function DevelopmentWorks() {
       if (activeTab !== "all") {
         url.searchParams.set("category", activeTab);
       }
-      
+
       const res = await fetch(url.toString());
       if (!res.ok) throw new Error("Failed to load news");
       const data: NewsItem[] = await res.json();
       setNewsList(data || []);
     } catch (err) {
       setError(
-        lang === "mr"
-          ? "माहिती लोड करण्यात अडचण आली."
-          : "Failed to load developments archive."
+        lang === "mr" ? "माहिती लोड करण्यात अडचण आली." : "Failed to load developments archive.",
       );
     } finally {
       setLoading(false);
@@ -94,7 +92,7 @@ export function DevelopmentWorks() {
   // Tabs layout
   const allLabel = lang === "mr" ? "सर्व घडामोडी" : "All Updates";
   const uniqueMap = new Map<string, CategoryItem>();
-  categories.forEach(c => {
+  categories.forEach((c) => {
     if (!uniqueMap.has(c.key)) uniqueMap.set(c.key, c);
   });
   const uniqueCategories = Array.from(uniqueMap.values());
@@ -102,7 +100,7 @@ export function DevelopmentWorks() {
 
   // Featured and regular split
   const featuredItem = newsList[0];
-  const rightItems = newsList.slice(1, 4);
+  const rightItems = newsList.slice(1, 3);
 
   return (
     <section id="works" className="py-16 md:py-24 container-x bg-white">
@@ -168,12 +166,13 @@ export function DevelopmentWorks() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="flex flex-col h-full hover:shadow-md transition-all duration-300 p-2 rounded-2xl border border-transparent hover:border-gray-100"
+                className="flex flex-col hover:shadow-md transition-all duration-300 p-2 rounded-2xl border border-transparent hover:border-gray-100"
               >
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-xl aspect-[16/10] bg-secondary/30 flex-shrink-0">
                   {featuredItem.image ? (
-                    featuredItem.image.match(/\.(mp4|webm|ogg|mov)$/i) || featuredItem.image.includes("video") ? (
+                    featuredItem.image.match(/\.(mp4|webm|ogg|mov)$/i) ||
+                    featuredItem.image.includes("video") ? (
                       <video
                         src={`${API_BASE}${featuredItem.image}`}
                         className="w-full h-full object-cover"
@@ -190,7 +189,8 @@ export function DevelopmentWorks() {
                         loading="lazy"
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = "https://placehold.co/800x500/1a2754/f97316?text=Shrirang+Appa+Barne";
+                          (e.target as HTMLImageElement).src =
+                            "https://placehold.co/800x500/1a2754/f97316?text=Shrirang+Appa+Barne";
                         }}
                       />
                     )
@@ -202,7 +202,7 @@ export function DevelopmentWorks() {
                 </div>
 
                 {/* Meta tags & title */}
-                <div className="mt-5 flex flex-col flex-grow">
+                <div className="mt-5 flex flex-col">
                   <div className="flex items-center gap-2 text-xs font-black text-saffron tracking-widest uppercase">
                     <span>{featuredItem.category}</span>
                     <span className="opacity-50">•</span>
@@ -217,12 +217,12 @@ export function DevelopmentWorks() {
                   </h3>
 
                   {featuredItem.description && (
-                    <p className="mt-3 text-sm md:text-base text-muted-foreground leading-relaxed line-clamp-3">
+                    <p className="mt-3 text-sm md:text-base text-muted-foreground leading-relaxed line-clamp-5">
                       {featuredItem.description}
                     </p>
                   )}
 
-                  <div className="mt-auto pt-5">
+                  <div className="mt-5">
                     <Link
                       href={`/news/${featuredItem.id}`}
                       className="inline-flex items-center gap-1.5 text-saffron font-black text-sm md:text-base hover:gap-2.5 transition-all uppercase tracking-wider"
@@ -242,7 +242,7 @@ export function DevelopmentWorks() {
             )}
 
             {/* Right Column: Regular Stacked Articles */}
-            <div className="flex flex-col gap-4 justify-between h-full">
+            <div className="flex flex-col gap-4 h-full">
               {rightItems.length > 0
                 ? rightItems.map((m, i) => (
                     <Link key={m.id} href={`/news/${m.id}`} className="block flex-1">
@@ -272,7 +272,8 @@ export function DevelopmentWorks() {
                                 loading="lazy"
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
-                                  (e.target as HTMLImageElement).src = "https://placehold.co/150x100/1a2754/f97316?text=News";
+                                  (e.target as HTMLImageElement).src =
+                                    "https://placehold.co/150x100/1a2754/f97316?text=News";
                                 }}
                               />
                             )
@@ -284,14 +285,12 @@ export function DevelopmentWorks() {
                         </div>
 
                         {/* Content info */}
-                        <div className="flex-grow min-w-0 flex flex-col justify-center py-2">
+                        <div className="flex-grow min-w-0 flex flex-col py-2">
                           <h4 className="text-sm font-bold text-navy leading-snug font-display line-clamp-2 hover:text-saffron transition">
                             {m.title}
                           </h4>
                           {m.description && (
-                            <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">
-                              {m.description}
-                            </p>
+                            <p className="mt-1.5 text-xs text-muted-foreground">{m.description}</p>
                           )}
                           <p className="text-[11px] text-muted-foreground font-semibold mt-2 uppercase tracking-wider flex items-center gap-1">
                             <Calendar className="h-2.5 w-2.5" />

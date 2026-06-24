@@ -38,13 +38,16 @@ export function Gallery() {
     setLoading(true);
     fetch(`${API_BASE}/api/images/`)
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to load gallery images");
+        if (!res.ok) {
+          console.warn("Gallery API is unavailable");
+          return [];
+        }
         return res.json();
       })
       .then((data: DBImage[]) => {
         const urls = (data || [])
-          .filter(item => item.image)
-          .map(item => `${API_BASE}${item.image}`);
+          .filter((item) => item.image)
+          .map((item) => `${API_BASE}${item.image}`);
         setImages(urls);
       })
       .catch((err) => {
@@ -101,7 +104,8 @@ export function Gallery() {
                     loading="lazy"
                     className="h-full w-full object-cover group-hover:scale-105 transition duration-500"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://placehold.co/400x300/1a2754/f97316?text=Gallery";
+                      (e.target as HTMLImageElement).src =
+                        "https://placehold.co/400x300/1a2754/f97316?text=Gallery";
                     }}
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition duration-300" />
@@ -125,7 +129,8 @@ export function Gallery() {
                     loading="lazy"
                     className="h-full w-full object-cover group-hover:scale-105 transition duration-500"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://placehold.co/400x300/1a2754/f97316?text=Gallery";
+                      (e.target as HTMLImageElement).src =
+                        "https://placehold.co/400x300/1a2754/f97316?text=Gallery";
                     }}
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition duration-300" />

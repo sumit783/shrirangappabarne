@@ -51,7 +51,9 @@ function ShareButtons({ title }: { title: string }) {
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {}
+    } catch (e) {
+      // ignore
+    }
   };
 
   const encodedUrl = encodeURIComponent(url);
@@ -120,15 +122,13 @@ export default function NewsDetailPage() {
         setError(
           lang === "mr"
             ? "माहिती लोड करण्यात त्रुटी आली."
-            : "Failed to load news article. Please try again."
-        )
+            : "Failed to load news article. Please try again.",
+        ),
       )
       .finally(() => setLoading(false));
   }, [id, lang]);
 
-  const displayDate = newsItem
-    ? formatDate(newsItem.news_date || newsItem.created_at, lang)
-    : "";
+  const displayDate = newsItem ? formatDate(newsItem.news_date || newsItem.created_at, lang) : "";
   const coverImage = newsItem?.image ? `${API_BASE}${newsItem.image}` : null;
 
   return (

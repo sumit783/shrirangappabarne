@@ -45,7 +45,9 @@ export function Contact() {
       toast.success(lang === "mr" ? "संदेश यशस्वीरित्या पाठवला!" : "Message sent successfully!");
       setForm({ name: "", mobile: "", email: "", subject: "", message: "" });
     } catch (err) {
-      toast.error(lang === "mr" ? "संदेश पाठवण्यात त्रुटी आली." : "Failed to send message. Please try again.");
+      toast.error(
+        lang === "mr" ? "संदेश पाठवण्यात त्रुटी आली." : "Failed to send message. Please try again.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -161,11 +163,7 @@ export function Contact() {
           disabled={submitting}
           className="mt-6 inline-flex items-center gap-2 bg-gradient-saffron text-white px-8 py-3.5 rounded-full font-semibold shadow-saffron hover:scale-105 transition disabled:opacity-50 disabled:pointer-events-none"
         >
-          {submitting ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Send className="h-4 w-4" />
-          )}
+          {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
           {t("contact.send")}
         </button>
       </motion.form>

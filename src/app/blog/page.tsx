@@ -124,7 +124,9 @@ export default function BlogPage() {
       const data: Blog[] = await res.json();
       setBlogs(data);
     } catch (err) {
-      setError(lang === "mr" ? "ब्लॉग लोड करण्यात त्रुटी आली." : "Failed to load blogs. Please try again.");
+      setError(
+        lang === "mr" ? "ब्लॉग लोड करण्यात त्रुटी आली." : "Failed to load blogs. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -233,8 +235,8 @@ export default function BlogPage() {
                     ? `"${debouncedSearch}" साठी कोणताही लेख उपलब्ध नाही.`
                     : `No results for "${debouncedSearch}".`
                   : lang === "mr"
-                  ? "अद्याप कोणतेही ब्लॉग प्रकाशित नाहीत."
-                  : "No blogs published yet."}
+                    ? "अद्याप कोणतेही ब्लॉग प्रकाशित नाहीत."
+                    : "No blogs published yet."}
               </p>
               {debouncedSearch && (
                 <button

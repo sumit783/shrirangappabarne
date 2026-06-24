@@ -44,3 +44,10 @@ build/
 .env.production.local
 .env.*
 !.env.example
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts

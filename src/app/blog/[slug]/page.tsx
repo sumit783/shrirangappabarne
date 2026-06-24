@@ -57,7 +57,9 @@ function ShareButtons({ title, slug }: { title: string; slug: string }) {
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {}
+    } catch (e) {
+      // ignore
+    }
   };
 
   const encodedUrl = encodeURIComponent(url);
@@ -98,20 +100,14 @@ function ShareButtons({ title, slug }: { title: string; slug: string }) {
   );
 }
 
-function BlogPoints({
-  points,
-}: {
-  points: string[] | { heading?: string; text?: string }[];
-}) {
+function BlogPoints({ points }: { points: string[] | { heading?: string; text?: string }[] }) {
   if (!points || points.length === 0) return null;
 
   const isStringArray = typeof points[0] === "string";
 
   return (
     <div className="my-8 bg-saffron/5 border-l-4 border-saffron rounded-r-2xl p-6">
-      <h3 className="font-bold text-navy text-base mb-4 font-display">
-        Key Points
-      </h3>
+      <h3 className="font-bold text-navy text-base mb-4 font-display">Key Points</h3>
       <ul className="space-y-3">
         {isStringArray
           ? (points as string[]).map((point, i) => (
@@ -124,9 +120,7 @@ function BlogPoints({
               <li key={i} className="flex gap-3 text-sm text-foreground leading-relaxed">
                 <span className="flex-shrink-0 mt-1 h-2 w-2 rounded-full bg-saffron" />
                 <span>
-                  {point.heading && (
-                    <strong className="text-navy">{point.heading}: </strong>
-                  )}
+                  {point.heading && <strong className="text-navy">{point.heading}: </strong>}
                   {point.text}
                 </span>
               </li>
@@ -157,7 +151,9 @@ export default function BlogDetailPage() {
         if (data.blog_points && typeof data.blog_points === "string") {
           try {
             data.blog_points = JSON.parse(data.blog_points as unknown as string);
-          } catch {}
+          } catch (e) {
+            // ignore
+          }
         }
         setBlog(data);
       })
@@ -165,15 +161,13 @@ export default function BlogDetailPage() {
         setError(
           lang === "mr"
             ? "लेख लोड करण्यात त्रुटी आली."
-            : "Failed to load article. Please try again."
-        )
+            : "Failed to load article. Please try again.",
+        ),
       )
       .finally(() => setLoading(false));
   }, [slug, lang]);
 
-  const displayDate = blog
-    ? formatDate(blog.published_at || blog.created_at, lang)
-    : "";
+  const displayDate = blog ? formatDate(blog.published_at || blog.created_at, lang) : "";
   const coverImage = blog?.image ? `${API_BASE}${blog.image}` : null;
 
   return (
@@ -211,9 +205,7 @@ export default function BlogDetailPage() {
       {!loading && !error && blog && (
         <>
           {/* Hero */}
-          <section
-            className="relative pt-24 md:pt-32 pb-0 bg-gradient-to-b from-navy to-navy/90 text-white overflow-hidden"
-          >
+          <section className="relative pt-24 md:pt-32 pb-0 bg-gradient-to-b from-navy to-navy/90 text-white overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-saffron/5 via-transparent to-gold/5 pointer-events-none" />
 
             <div className="container-x relative z-10 max-w-4xl mx-auto">
@@ -308,9 +300,7 @@ export default function BlogDetailPage() {
               {/* Blog points */}
               {blog.blog_points &&
                 Array.isArray(blog.blog_points) &&
-                blog.blog_points.length > 0 && (
-                  <BlogPoints points={blog.blog_points} />
-                )}
+                blog.blog_points.length > 0 && <BlogPoints points={blog.blog_points} />}
 
               {/* Main content */}
               {blog.content && (

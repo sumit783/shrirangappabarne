@@ -111,7 +111,8 @@ export function News() {
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://placehold.co/800x500/1a2754/f97316?text=Blog";
+                        (e.target as HTMLImageElement).src =
+                          "https://placehold.co/800x500/1a2754/f97316?text=Blog";
                       }}
                     />
                   ) : (
@@ -145,7 +146,8 @@ export function News() {
                     </p>
                   )}
                   <div className="mt-5 inline-flex items-center gap-1.5 text-saffron font-semibold text-sm">
-                    {lang === "mr" ? "सविस्तर वाचा" : "Read Article"} <ArrowRight className="h-4 w-4" />
+                    {lang === "mr" ? "सविस्तर वाचा" : "Read Article"}{" "}
+                    <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
               </motion.article>
@@ -157,7 +159,7 @@ export function News() {
             <h3 className="text-lg font-bold text-navy">
               {lang === "mr" ? "ताज्या पोस्ट्स" : "Recent Posts"}
             </h3>
-            
+
             {rest.length > 0 ? (
               rest.map((n, i) => (
                 <Link key={n.id} href={`/blog/${n.slug || n.id}`}>
@@ -176,7 +178,8 @@ export function News() {
                           loading="lazy"
                           className="w-full h-full object-cover"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = "https://placehold.co/120x120/1a2754/f97316?text=Blog";
+                            (e.target as HTMLImageElement).src =
+                              "https://placehold.co/120x120/1a2754/f97316?text=Blog";
                           }}
                         />
                       ) : (

@@ -8,7 +8,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { useT } from "@/lib/i18n";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 interface NewsItem {
   id: number;
@@ -49,7 +49,8 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
     >
       {/* Cover image */}
       <div className="relative h-52 overflow-hidden bg-secondary/30">
-        {item.image && (item.image.match(/\.(mp4|webm|ogg|mov)$/i) || item.image.includes("video")) ? (
+        {item.image &&
+        (item.image.match(/\.(mp4|webm|ogg|mov)$/i) || item.image.includes("video")) ? (
           <video
             src={`${API_BASE}${item.image}`}
             className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
@@ -140,7 +141,7 @@ export default function NewsPage() {
       .then((data: { categories: CategoryItem[] | string[] }) => {
         const cats = data.categories || [];
         if (cats.length > 0 && typeof cats[0] === "string") {
-          setCategories((cats as string[]).map(c => ({ key: c, label: c })));
+          setCategories((cats as string[]).map((c) => ({ key: c, label: c })));
         } else {
           setCategories(cats as CategoryItem[]);
         }
@@ -157,19 +158,19 @@ export default function NewsPage() {
       url.searchParams.set("lang", lang);
       url.searchParams.set("page", page.toString());
       url.searchParams.set("limit", "9");
-      
+
       if (activeTab !== "all") {
         url.searchParams.set("category", activeTab);
       }
       if (debouncedSearch) {
         url.searchParams.set("search", debouncedSearch);
       }
-      
+
       const res = await fetch(url.toString());
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      let responseData = await res.json();
-      
-      if (responseData && 'data' in responseData) {
+      const responseData = await res.json();
+
+      if (responseData && "data" in responseData) {
         setNewsList(responseData.data);
         setTotalPages(responseData.totalPages || 1);
       } else {
@@ -197,7 +198,7 @@ export default function NewsPage() {
       {/* Hero Banner */}
       <section className="relative pt-32 pb-16 bg-gradient-to-br from-navy via-navy/95 to-navy-soft text-white overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-saffron/10 rounded-full blur-[100px] pointer-events-none -mr-40 -mt-40" />
-        
+
         <div className="container-x relative z-10 text-center">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
@@ -273,7 +274,9 @@ export default function NewsPage() {
           {loading && (
             <div className="flex flex-col items-center justify-center py-32 gap-4">
               <Loader2 className="h-10 w-10 text-saffron animate-spin" />
-              <p className="text-muted-foreground text-sm">{lang === "mr" ? "लोड होत आहे..." : "Loading articles..."}</p>
+              <p className="text-muted-foreground text-sm">
+                {lang === "mr" ? "लोड होत आहे..." : "Loading articles..."}
+              </p>
             </div>
           )}
 
@@ -304,8 +307,8 @@ export default function NewsPage() {
                     ? `"${debouncedSearch}" साठी कोणतेही निकाल मिळाले नाहीत.`
                     : `No results matching "${debouncedSearch}".`
                   : lang === "mr"
-                  ? "या प्रकारात अद्याप कोणतीही बातमी उपलब्ध नाही."
-                  : "No updates published in this category yet."}
+                    ? "या प्रकारात अद्याप कोणतीही बातमी उपलब्ध नाही."
+                    : "No updates published in this category yet."}
               </p>
             </div>
           )}
@@ -328,17 +331,19 @@ export default function NewsPage() {
           {!loading && !error && totalPages > 1 && (
             <div className="mt-12 flex justify-center items-center gap-4">
               <button
-                onClick={() => setPage(p => Math.max(1, p - 1))}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
                 className="px-4 py-2 rounded-full border border-border bg-card text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary transition-colors"
               >
                 {lang === "mr" ? "मागे" : "Previous"}
               </button>
               <span className="text-sm font-medium text-muted-foreground">
-                {lang === "mr" ? `पृष्ठ ${page} पैकी ${totalPages}` : `Page ${page} of ${totalPages}`}
+                {lang === "mr"
+                  ? `पृष्ठ ${page} पैकी ${totalPages}`
+                  : `Page ${page} of ${totalPages}`}
               </span>
               <button
-                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
                 className="px-4 py-2 rounded-full border border-border bg-card text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary transition-colors"
               >

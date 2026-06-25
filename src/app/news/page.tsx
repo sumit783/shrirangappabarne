@@ -250,7 +250,10 @@ export default function NewsPage() {
 
       {/* Categories Filter Tabs */}
       <div className="border-b bg-card">
-        <div className="container-x py-4 flex flex-nowrap overflow-x-auto gap-3 items-center" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div
+          className="container-x py-4 flex flex-nowrap overflow-x-auto gap-3 items-center"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
           <style>{`
             .container-x::-webkit-scrollbar {
               display: none;

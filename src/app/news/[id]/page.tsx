@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -129,7 +130,7 @@ export default function NewsDetailPage() {
   }, [id, lang]);
 
   const displayDate = newsItem ? formatDate(newsItem.news_date || newsItem.created_at, lang) : "";
-  const coverImage = newsItem?.image ? `${API_BASE}${newsItem.image}` : null;
+  const coverImage = newsItem?.image ? getMediaUrl(newsItem.image) : null;
 
   return (
     <div className="bg-background min-h-screen flex flex-col">

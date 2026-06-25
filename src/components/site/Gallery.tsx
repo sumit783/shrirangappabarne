@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -47,7 +48,7 @@ export function Gallery() {
       .then((data: DBImage[]) => {
         const urls = (data || [])
           .filter((item) => item.image)
-          .map((item) => `${API_BASE}${item.image}`);
+          .map((item) => getMediaUrl(item.image));
         setImages(urls);
       })
       .catch((err) => {

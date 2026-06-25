@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -168,7 +169,7 @@ export default function BlogDetailPage() {
   }, [slug, lang]);
 
   const displayDate = blog ? formatDate(blog.published_at || blog.created_at, lang) : "";
-  const coverImage = blog?.image ? `${API_BASE}${blog.image}` : null;
+  const coverImage = blog?.image ? getMediaUrl(blog.image) : null;
 
   return (
     <div className="bg-background min-h-screen flex flex-col">

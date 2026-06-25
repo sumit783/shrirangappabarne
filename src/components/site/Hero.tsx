@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -42,7 +43,7 @@ export function Hero() {
       .then((data: DBImage[]) => {
         const dbSlides = (data || [])
           .filter((item) => item.image)
-          .map((item) => `${API_BASE}${item.image}`);
+          .map((item) => getMediaUrl(item.image));
 
         // Combine static frontend slides first, then dynamic ones
         setSlides([...staticSlides, ...dbSlides]);

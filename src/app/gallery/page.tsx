@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState } from "react";
 import { Navbar } from "@/components/site/Navbar";
@@ -127,11 +128,11 @@ export default function GalleryPage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: i * 0.04 }}
-                  onClick={() => setLightbox(`${API_BASE}${item.image}`)}
+                  onClick={() => setLightbox(getMediaUrl(item.image))}
                   className="group relative aspect-square rounded-2xl overflow-hidden border border-gray-100 shadow-md hover:shadow-elegant hover:border-saffron transition-all duration-300 cursor-zoom-in bg-secondary/20"
                 >
                   <img
-                    src={`${API_BASE}${item.image}`}
+                    src={getMediaUrl(item.image)}
                     alt={item.title || "Gallery"}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"

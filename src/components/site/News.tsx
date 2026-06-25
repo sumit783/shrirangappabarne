@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -106,7 +107,7 @@ export function News() {
                 <div className="relative h-56 md:h-80 overflow-hidden bg-secondary/30">
                   {featured.image ? (
                     <img
-                      src={`${API_BASE}${featured.image}`}
+                      src={getMediaUrl(featured.image)}
                       alt={featured.title}
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
@@ -173,7 +174,7 @@ export function News() {
                     <div className="w-28 h-28 rounded-xl overflow-hidden bg-secondary/30 flex-shrink-0">
                       {n.image ? (
                         <img
-                          src={`${API_BASE}${n.image}`}
+                          src={getMediaUrl(n.image)}
                           alt=""
                           loading="lazy"
                           className="w-full h-full object-cover"

@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -46,7 +47,7 @@ function BlogCard({ blog, lang, index }: { blog: Blog; lang: "mr" | "en"; index:
       {/* Blog cover image */}
       <div className="relative h-52 overflow-hidden bg-secondary/30">
         <img
-          src={blog.image ? `${API_BASE}${blog.image}` : placeholder}
+          src={blog.image ? getMediaUrl(blog.image) : placeholder}
           alt={blog.title}
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition duration-500"

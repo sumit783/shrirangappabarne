@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -52,7 +53,7 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
         {item.image &&
         (item.image.match(/\.(mp4|webm|ogg|mov)$/i) || item.image.includes("video")) ? (
           <video
-            src={`${API_BASE}${item.image}`}
+            src={getMediaUrl(item.image)}
             className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             autoPlay
             muted
@@ -61,7 +62,7 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
           />
         ) : (
           <img
-            src={item.image ? `${API_BASE}${item.image}` : placeholder}
+            src={item.image ? getMediaUrl(item.image) : placeholder}
             alt={item.title}
             loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
@@ -249,13 +250,18 @@ export default function NewsPage() {
 
       {/* Categories Filter Tabs */}
       <div className="border-b bg-card">
-        <div className="container-x py-4 flex flex-wrap gap-2 justify-center">
+        <div className="container-x py-4 flex flex-nowrap overflow-x-auto gap-3 items-center" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <style>{`
+            .container-x::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
           {tabsList.map((tab) => (
             <button
               suppressHydrationWarning
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 border-2 ${
+              className={`px-4 py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 border-2 whitespace-nowrap flex-shrink-0 ${
                 activeTab === tab.key
                   ? "border-saffron text-saffron bg-transparent"
                   : "border-transparent text-muted-foreground hover:text-saffron bg-transparent"

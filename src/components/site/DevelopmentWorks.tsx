@@ -1,4 +1,5 @@
 "use client";
+import { getMediaUrl } from "@/lib/utils";
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -95,7 +96,7 @@ export function DevelopmentWorks() {
   categories.forEach((c) => {
     if (!uniqueMap.has(c.key)) uniqueMap.set(c.key, c);
   });
-  const uniqueCategories = Array.from(uniqueMap.values());
+  const uniqueCategories = Array.from(uniqueMap.values()).slice(0, 4);
   const tabsList = [{ key: "all", label: allLabel }, ...uniqueCategories];
 
   // Featured and regular split
@@ -174,7 +175,7 @@ export function DevelopmentWorks() {
                     featuredItem.image.match(/\.(mp4|webm|ogg|mov)$/i) ||
                     featuredItem.image.includes("video") ? (
                       <video
-                        src={`${API_BASE}${featuredItem.image}`}
+                        src={getMediaUrl(featuredItem.image)}
                         className="w-full h-full object-cover"
                         controls
                         autoPlay
@@ -184,7 +185,7 @@ export function DevelopmentWorks() {
                       />
                     ) : (
                       <img
-                        src={`${API_BASE}${featuredItem.image}`}
+                        src={getMediaUrl(featuredItem.image)}
                         alt={featuredItem.title}
                         loading="lazy"
                         className="w-full h-full object-cover"
@@ -258,7 +259,7 @@ export function DevelopmentWorks() {
                           {m.image ? (
                             m.image.match(/\.(mp4|webm|ogg|mov)$/i) || m.image.includes("video") ? (
                               <video
-                                src={`${API_BASE}${m.image}`}
+                                src={getMediaUrl(m.image)}
                                 className="w-full h-full object-cover"
                                 autoPlay
                                 muted
@@ -267,7 +268,7 @@ export function DevelopmentWorks() {
                               />
                             ) : (
                               <img
-                                src={`${API_BASE}${m.image}`}
+                                src={getMediaUrl(m.image)}
                                 alt={m.title}
                                 loading="lazy"
                                 className="w-full h-full object-cover"

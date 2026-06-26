@@ -8,7 +8,7 @@ export const portraitImg = portrait;
 
 export const stats = [
   { value: 3, suffix: "x", key: "stats.terms" },
-  { value: 10, suffix: "+", key: "stats.years" },
+  { value: 25, suffix: "+", key: "stats.years" },
   { value: 5, suffix: "+", key: "stats.awards" },
   { value: 1, suffix: "", key: "stats.constituency" },
 ] as const;

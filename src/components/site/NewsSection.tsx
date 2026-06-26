@@ -221,7 +221,7 @@ export function NewsSection() {
                 </Link>
               </motion.div>
             ))}
-            
+
             {newsList.length === 0 && (
               <div className="col-span-full text-center text-muted-foreground py-12">
                 {lang === "mr"

@@ -11,46 +11,136 @@ import { Landmark, Calendar, Award, Users, Target } from "lucide-react";
 const timeline = {
   mr: [
     {
-      y: "2009",
-      t: "नगरसेवक, पिंपरी-चिंचवड",
-      desc: "स्थानिक पातळीवर जनतेच्या कामांना गती देणे आणि नगररचना कामांमध्ये सक्रिय सहभाग.",
+      y: "१९९७",
+      t: "पिंपरी-चिंचवड महापालिकेत नगरसेवक म्हणून निवड",
+      desc: "पिंपरी-चिंचवड महापालिकेच्या निवडणुकीत प्रथमच नगरसेवक म्हणून निवडून येत सक्रिय राजकीय कारकिर्दीची सुरुवात केली.",
     },
     {
-      y: "2014",
-      t: "पहिल्यांदा खासदार म्हणून निवड",
-      desc: "मावळ लोकसभा मतदारसंघातून मोठ्या मताधिक्याने विजयी होत संसदेत पदार्पण.",
+      y: "१९९९",
+      t: "स्थायी समितीच्या अध्यक्षपदी निवड",
+      desc: "पिंपरी-चिंचवड महानगरपालिकेच्या स्थायी समितीचे अध्यक्ष म्हणून काम करत अनेक विकासकामांना गती दिली.",
     },
     {
-      y: "2019",
-      t: "दुसऱ्यांदा खासदार म्हणून निवड",
-      desc: "मतदारसंघातील लोकांच्या विश्वासाच्या जोरावर दुसऱ्यांदा संसदेचे तिकीट मिळवले.",
+      y: "२००२",
+      t: "पुन्हा नगरसेवक म्हणून निवड",
+      desc: "जनतेचा विश्वास कायम राखत दुसऱ्यांदा नगरसेवक म्हणून निवडून आले.",
     },
     {
-      y: "2024",
-      t: "तिसऱ्यांदा खासदार म्हणून निवड",
-      desc: "सलग तिसऱ्या टर्ममध्ये विजय मिळवत विकासाचा निर्धार पुढे चालू ठेवला.",
+      y: "२००२–०५",
+      t: "विरोधी पक्षनेते व जिल्हा नियोजन समिती सदस्य",
+      desc: "पिंपरी-चिंचवड महापालिकेत विरोधी पक्षनेते म्हणून प्रभावी भूमिका बजावत पुणे जिल्हा नियोजन समितीवरही सदस्य म्हणून कार्य केले.",
+    },
+    {
+      y: "२००७",
+      t: "तिसऱ्यांदा नगरसेवक म्हणून निवड",
+      desc: "पुन्हा नगरसेवक म्हणून निवडून येत स्थानिक विकास आणि नागरिकांच्या प्रश्नांसाठी सातत्याने कार्य केले.",
+    },
+    {
+      y: "२०१२",
+      t: "नगरसेवक व शिवसेना गटनेते",
+      desc: "नगरसेवक म्हणून निवडून येत शिवसेना गटनेतेपदाची जबाबदारी स्वीकारली.",
+    },
+    {
+      y: "२०१४",
+      t: "१६व्या लोकसभेसाठी खासदार म्हणून निवड",
+      desc: "मावळ लोकसभा मतदारसंघातून प्रथमच खासदार म्हणून निवडून येत राष्ट्रीय राजकारणात प्रवेश केला.",
+    },
+    {
+      y: "२०१५",
+      t: "‘संसद रत्न’ पुरस्कार",
+      desc: "संसदेतील उल्लेखनीय आणि सक्रिय कामगिरीबद्दल 'संसद रत्न' पुरस्काराने गौरविण्यात आले.",
+    },
+    {
+      y: "२०१६",
+      t: "पुन्हा ‘संसद रत्न’ पुरस्कार",
+      desc: "सलग दुसऱ्या वर्षी उत्कृष्ट संसदीय कामगिरीबद्दल 'संसद रत्न' पुरस्कार प्राप्त झाला.",
+    },
+    {
+      y: "२०१९",
+      t: "१७व्या लोकसभेसाठी पुन्हा निवड",
+      desc: "जनतेचा विश्वास कायम राखत दुसऱ्यांदा खासदार म्हणून लोकसभेत निवडून आले.",
+    },
+    {
+      y: "२०२०",
+      t: "‘संसद महारत्न’ पुरस्कार",
+      desc: "उत्कृष्ट संसदीय योगदानासाठी प्रतिष्ठित 'संसद महारत्न' पुरस्काराने सन्मानित करण्यात आले.",
+    },
+    {
+      y: "२०२४",
+      t: "१८व्या लोकसभेसाठी सलग तिसऱ्यांदा निवड",
+      desc: "सलग तिसऱ्यांदा खासदार म्हणून निवडून येत विकासाची वाटचाल अधिक बळकट केली.",
+    },
+    {
+      y: "२०२५",
+      t: "विशेष संसदरत्न पुरस्कार",
+      desc: "संसदेतील सातत्यपूर्ण आणि उल्लेखनीय कामगिरीबद्दल 'विशेष संसदरत्न पुरस्कार' प्रदान करण्यात आला.",
     },
   ],
   en: [
     {
-      y: "2009",
-      t: "Corporator, Pimpri-Chinchwad",
-      desc: "Initiated grassroots reforms and drove city development planning.",
+      y: "1997",
+      t: "Elected as Corporator, Pimpri-Chinchwad Municipal Corporation",
+      desc: "Began his political career by being elected as a Corporator in the Pimpri-Chinchwad Municipal Corporation.",
+    },
+    {
+      y: "1999",
+      t: "Elected Chairman of the Standing Committee",
+      desc: "Served as the Chairman of the Standing Committee of the Pimpri-Chinchwad Municipal Corporation, contributing to key development initiatives.",
+    },
+    {
+      y: "2002",
+      t: "Re-elected as Corporator",
+      desc: "Earned the trust of the people once again by being re-elected as a Corporator.",
+    },
+    {
+      y: "2002–05",
+      t: "Leader of the Opposition & District Planning Committee Member",
+      desc: "Served as the Leader of the Opposition in the Pimpri-Chinchwad Municipal Corporation and as a member of the Pune District Planning Committee.",
+    },
+    {
+      y: "2007",
+      t: "Re-elected as Corporator",
+      desc: "Continued his commitment to local development after being elected as a Corporator for another term.",
+    },
+    {
+      y: "2012",
+      t: "Corporator & Shiv Sena Group Leader",
+      desc: "Elected as a Corporator and entrusted with the responsibility of serving as the Shiv Sena Group Leader.",
     },
     {
       y: "2014",
-      t: "Elected MP for the First Time",
-      desc: "Entered the Parliament with a record mandate from Maval.",
+      t: "Elected to the 16th Lok Sabha",
+      desc: "Entered national politics after being elected as a Member of Parliament from the Maval Lok Sabha constituency.",
+    },
+    {
+      y: "2015",
+      t: "Received the Sansad Ratna Award",
+      desc: "Honoured with the prestigious Sansad Ratna Award for outstanding performance in Parliament.",
+    },
+    {
+      y: "2016",
+      t: "Received the Sansad Ratna Award Again",
+      desc: "Received the Sansad Ratna Award for the second consecutive year in recognition of his exceptional parliamentary performance.",
     },
     {
       y: "2019",
-      t: "Elected MP for the Second Term",
-      desc: "Sustained the momentum with public trust, continuing parliamentary excellence.",
+      t: "Re-elected to the 17th Lok Sabha",
+      desc: "Won a second consecutive term as Member of Parliament, reaffirming the trust and support of the people.",
+    },
+    {
+      y: "2020",
+      t: "Honoured with the Sansad Maharatna Award",
+      desc: "Received the prestigious Sansad Maharatna Award for his remarkable contribution to parliamentary proceedings.",
     },
     {
       y: "2024",
-      t: "Elected MP for the Third Term",
-      desc: "Secured a historic third term to advance inclusive governance and infrastructure.",
+      t: "Elected to the 18th Lok Sabha for a Third Consecutive Term",
+      desc: "Secured a historic third consecutive victory as a Member of Parliament, continuing his commitment to the development of the constituency.",
+    },
+    {
+      y: "2025",
+      t: "Honoured with the Special Sansad Ratna Award",
+      desc: "Received the Special Sansad Ratna Award in recognition of his consistent and distinguished parliamentary performance.",
     },
   ],
 };

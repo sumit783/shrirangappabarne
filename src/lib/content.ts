@@ -294,41 +294,41 @@ export const offices = {
   mr: [
     {
       name: "पुणे कार्यालय",
-      addr: "पिंपरी-चिंचवड, पुणे - 411017",
+      addr: "श्री निवास, पद्मजी पेपर मिल जवळ, थेरगाव, पुणे, 411 033",
       phone: "+91 20 2700 0000",
       email: "pune@shrirangappabarne.in",
     },
     {
       name: "दिल्ली कार्यालय",
-      addr: "नॉर्थ ॲव्हेन्यू, नवी दिल्ली - 110001",
+      addr: "36, डुप्लेक्स, नॉर्थ एव्हेन्यू, नवी दिल्ली 110 001 011 23094027",
       phone: "+91 11 2300 0000",
       email: "delhi@shrirangappabarne.in",
     },
     {
       name: "पनवेल कार्यालय",
-      addr: "पनवेल, रायगड - 410206",
+      addr: "ओमसाई बिल्डिंग, पहिला मजला, गार्डन हॉटेल जवळ, पनवेल, रायगड 410 206",
       phone: "+91 22 2700 0000",
       email: "panvel@shrirangappabarne.in",
     },
   ],
-  en: [
-    {
-      name: "Pune Office",
-      addr: "Pimpri-Chinchwad, Pune - 411017",
-      phone: "+91 20 2700 0000",
-      email: "pune@shrirangappabarne.in",
-    },
-    {
-      name: "Delhi Office",
-      addr: "North Avenue, New Delhi - 110001",
-      phone: "+91 11 2300 0000",
-      email: "delhi@shrirangappabarne.in",
-    },
-    {
-      name: "Panvel Office",
-      addr: "Panvel, Raigad - 410206",
-      phone: "+91 22 2700 0000",
-      email: "panvel@shrirangappabarne.in",
-    },
-  ],
+  en:[
+  {
+    name: "Pune Office",
+    addr: "Shree Nivas, Near Padmaji Paper Mill, Thergaon, Pune 411033",
+    phone: "+91 20 2700 0000",
+    email: "pune@shrirangappabarne.in",
+  },
+  {
+    name: "Delhi Office",
+    addr: "36, Duplex, North Avenue, New Delhi 110001",
+    phone: "+91 11 2300 0000",
+    email: "delhi@shrirangappabarne.in",
+  },
+  {
+    name: "Panvel Office",
+    addr: "Omsai Building, First Floor, Near Garden Hotel, Panvel, Raigad 410206",
+    phone: "+91 22 2700 0000",
+    email: "panvel@shrirangappabarne.in",
+  },
+],
 };

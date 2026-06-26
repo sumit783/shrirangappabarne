@@ -11,7 +11,7 @@ const dict = {
     "nav.home": "मुख्यपृष्ठ",
     "nav.about": "परिचय",
     "nav.works": "विकास कामे",
-    "nav.vision": "दृष्टी व ध्येय",
+    "nav.vision": "दृष्टीकोन व ध्येय",
     "nav.constituency": "मतदारसंघ",
     "nav.gallery": "छायाचित्र दालन",
     "nav.news": "बातम्या",
@@ -29,11 +29,11 @@ const dict = {
     "stats.constituency": "मावळ प्रतिनिधी",
     "about.title": "एक समर्पित जनसेवक",
     "about.p1":
-      "श्री श्रीरंग चंदू बारणे हे भारतीय जनतेच्या तीन पिढ्यांच्या विश्वासावर मावळ लोकसभा मतदारसंघातून सलग तीन वेळा निवडून आलेले लोकप्रिय खासदार आहेत. पिंपरी-चिंचवड महानगरपालिकेच्या नगरसेवक पदापासून सुरू झालेला त्यांचा प्रवास आज दिल्लीच्या संसदेपर्यंत पोहोचला आहे.",
+      "श्रीरंग आप्पा बारणे (Shrirang Appa Barne) यांनी आपली राजकीय वाटचाल १९९७ साली पिंपरी-चिंचवड महापालिकेत नगरसेवक म्हणून सुरू केली. १९९९ साली त्यांनी स्थायी समितीचे अध्यक्षपद भूषविले. त्यानंतर अनेक वेळा नगरसेवक म्हणून निवडून येत त्यांनी विरोधी पक्षनेते आणि शिवसेना गटनेते म्हणून प्रभावी भूमिका बजावली. २०१४ साली ते राष्ट्रीय राजकारणात दाखल झाले आणि १६व्या लोकसभेसाठी खासदार म्हणून निवडून आले. २०१९ मध्ये १७व्या लोकसभेसाठी पुनः एकदा जनतेने त्यांच्यावर विश्वास दाखवत त्यांची दुसऱ्यांदा निवड केली. २०२४ साली ते सलग तिसऱ्यांदा १८व्या लोकसभेसाठी खासदार म्हणून निवडून आले.",
     "about.p2":
-      "रस्ते, रेल्वे, पाणी, आरोग्य आणि शिक्षण क्षेत्रात त्यांनी मतदारसंघात केलेली कामे ही त्यांच्या कार्यपद्धतीची साक्ष आहेत. संसदेमध्ये जनतेचे प्रश्न प्रभावीपणे मांडल्याबद्दल त्यांना अनेकवेळा 'संसदरत्न' पुरस्काराने सन्मानित करण्यात आले आहे.",
+      "खासदार म्हणून त्यांनी ऊर्जा, संरक्षण, अर्थसंकल्प, पर्यटन व संस्कृती अशा देशाच्या दृष्टीने अत्यंत महत्त्वाच्या संसदीय समित्यांवर कार्य केले. त्यांच्या संसदेतील उल्लेखनीय आणि सक्रिय कामगिरीसाठी त्यांना 'संसदरत्न पुरस्कार', 'विशेष संसदरत्न पुरस्कार' तसेच 'संसद महारथी पुरस्कार' यांसारखे अनेक प्रतिष्ठित राष्ट्रीय सन्मान प्राप्त झाले आहेत.",
     "about.journey": "राजकीय प्रवास",
-    "vision.title": "दृष्टी व ध्येय",
+    "vision.title": "दृष्टीकोन व ध्येय",
     "vision.subtitle": "मावळच्या प्रत्येक नागरिकासाठी सर्वसमावेशक विकास",
     "works.title": "विकास कामे",
     "works.subtitle": "मतदारसंघातील दर्जेदार पायाभूत सुविधा प्रकल्प",
@@ -97,9 +97,9 @@ const dict = {
     "stats.constituency": "Maval Representative",
     "about.title": "A Dedicated Public Servant",
     "about.p1":
-      "Shri Shrirang Chandu Barne is a three-time elected Member of Parliament from the Maval Lok Sabha constituency. His journey, which began as a corporator with the Pimpri-Chinchwad Municipal Corporation, today extends to the halls of the Indian Parliament in New Delhi.",
+      "Shrirang Appa Barne began his political journey in 1997 as a Corporator in the Pimpri-Chinchwad Municipal Corporation. In 1999, he served as the Chairman of the Standing Committee. Over the years, he was elected as a Corporator multiple times and played a significant role as the Leader of the Opposition and Shiv Sena Group Leader. In 2014, he entered national politics and was elected as a Member of Parliament to the 16th Lok Sabha. In 2019, the people once again reposed their trust in him by electing him to the 17th Lok Sabha for a second consecutive term. In 2024, he was elected for a third consecutive term as a Member of Parliament to the 18th Lok Sabha.",
     "about.p2":
-      "His work across roads, railways, water, healthcare and education stands as testimony to a results-driven approach. He has been honoured with the prestigious 'Sansad Ratna' award multiple times for outstanding parliamentary performance.",
+      "As a Member of Parliament, he has served on several key Parliamentary Committees, including those related to Energy, Defence, Budget, Tourism, and Culture. In recognition of his outstanding and active parliamentary performance, he has been honoured with several prestigious national awards, including the Sansad Ratna Award, Special Sansad Ratna Award, and Sansad Maharathi Award.",
     "about.journey": "Political Journey",
     "vision.title": "Vision & Mission",
     "vision.subtitle": "Inclusive development for every citizen of Maval",

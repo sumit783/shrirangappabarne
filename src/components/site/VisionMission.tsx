@@ -3,8 +3,8 @@ import cutoutImg from "@/assets/portrait-removebg-preview.png";
 import { useT } from "@/lib/i18n";
 
 const mainContent = {
-  mr: "खासदार श्री श्रीरंग आप्पा बारणे हे मावळ लोकसभा मतदारसंघाच्या सर्वांगीण आणि सर्वसमावेशक विकासासाठी कटिबद्ध आहेत. प्रत्येक नागरिकाचे जीवनमान उंचावणे, पायाभूत सुविधांचा विस्तार करणे आणि मतदारसंघाला देशात अव्वल बनवणे हेच त्यांचे मुख्य ध्येय आहे. सामाजिक समतोल साधत प्रत्येकाला विकासाची समान संधी देणे यावर त्यांचा विशेष भर आहे.",
-  en: "Shri Shrirang Appa Barne is committed to the holistic growth of Maval, prioritizing citizen-centric governance and execution of robust development projects. His vision guides the path toward building an empowered, progressive, and self-reliant constituency where every citizen thrives through inclusive progress.",
+  mr: "सर्वसामान्य नागरिकांच्या हिताला प्राधान्य देत पारदर्शक, उत्तरदायी आणि विकासाभिमुख नेतृत्वाच्या माध्यमातून मावळ लोकसभा मतदारसंघाचा सर्वांगीण, शाश्वत आणि सर्वसमावेशक विकास घडवून आणणे. शासनाच्या योजना प्रत्येक घटकापर्यंत प्रभावीपणे पोहोचवून युवकांचे सक्षमीकरण, महिलांचा सहभाग आणि समाजातील शेवटच्या घटकाच्या उन्नतीसाठी सातत्याने कार्यरत राहणे.",
+  en: "To foster transparent, accountable, and development-oriented leadership that drives the holistic, sustainable, and inclusive growth of the Maval Lok Sabha constituency. Our mission is to ensure that the benefits of government schemes reach every citizen while empowering youth, promoting women's participation, and uplifting the most underserved sections of society.",
 };
 
 const visionItems = {
@@ -12,17 +12,17 @@ const visionItems = {
     left: [
       {
         title: "पायाभूत सुविधा",
-        desc: "मावळ मतदारसंघाच्या सर्वांगीण प्रगतीसाठी राष्ट्रीय महामार्ग रुंदीकरण, लोणावळा-पुणे लोकल रेल्वे फेऱ्यांची संख्या वाढवणे आणि ग्रामीण भागातील अंतर्गत रस्त्यांचे जाळे मजबूत करण्यावर विशेष भर दिला आहे, ज्यामुळे जलद आणि सुरक्षित प्रवासाची खात्री मिळते.",
+        desc: "आधुनिक रस्ते, पूल, पाणीपुरवठा, सार्वजनिक वाहतूक आणि स्मार्ट नागरी सुविधांचा विस्तार करून ग्रामीण व शहरी भागातील पायाभूत सुविधा अधिक सक्षम आणि विकासाभिमुख बनवणे. यासह शाश्वत विकासाच्या दृष्टिकोनातून प्रदूषणमुक्त पर्यावरण आणि सुनियोजित शहर उभारणीवर भर देणे, ज्यामुळे नागरिकांचे जीवनमान उंचावेल आणि रोजगाराच्या नवीन संधी निर्माण होतील.",
       },
     ],
     right: [
       {
         title: "दर्जेदार शिक्षण",
-        desc: "मावळमधील तरुणांच्या उज्ज्वल भविष्यासाठी जिल्हा परिषद शाळांमध्ये डिजिटल वर्गखोल्यांची निर्मिती, अत्याधुनिक संगणकीय आणि शैक्षणिक साहित्य पुरवणे आणि स्थानिक स्तरावर कौशल्य आणि तंत्रज्ञान स्नेही शिक्षण केंद्रांची यशस्वी स्थापना केली आहे.",
+        desc: "प्रत्येक विद्यार्थ्याला दर्जेदार शिक्षण, कौशल्य विकास, आधुनिक तंत्रज्ञान आणि रोजगाराभिमुख संधी उपलब्ध करून सक्षम, आत्मनिर्भर आणि स्पर्धात्मक युवा पिढी घडवणे. ई-लर्निंग, डिजिटल साक्षरता आणि जागतिक दर्जाच्या शैक्षणिक सुविधा सर्वसामान्यांपर्यंत पोहोचवून विद्यार्थ्यांच्या सर्वांगीण विकासासाठी आवश्यक व्यासपीठ निर्माण करणे.",
       },
       {
         title: "आरोग्य सेवा",
-        desc: "ग्रामीण व दुर्गम भागातील नागरिकांना तात्काळ व दर्जेदार उपचार मिळण्यासाठी प्राथमिक आरोग्य केंद्रांचे आधुनिकीकरण, फिरती दवाखाने, मोफत आरोग्य तपासणी शिबिरे आणि गरजू रुग्णांना थेट शासकीय योजनांचे आर्थिक साहाय्य मिळवून देण्याचे काम अविरत सुरू आहे.",
+        desc: "प्रत्येक नागरिकाला सुलभ, परवडणाऱ्या आणि गुणवत्तापूर्ण आरोग्य सेवा उपलब्ध करून ग्रामीण व शहरी भागातील आरोग्य सुविधा बळकट करणे आणि निरोगी समाजाची निर्मिती करणे. अत्याधुनिक वैद्यकीय तंत्रज्ञान, अद्ययावत रुग्णालये आणि प्रतिबंधात्मक आरोग्य मोहिमांच्या माध्यमातून शेवटच्या घटकापर्यंत उत्तम दर्जाची वैद्यकीय मदत पोहोचवण्यास प्राधान्य देणे.",
       },
     ],
   },
@@ -30,17 +30,17 @@ const visionItems = {
     left: [
       {
         title: "Infrastructure",
-        desc: "Developing world-class road networks, expanding local Lonavala-Pune railway services, and upgrading public transit corridors to ensure smooth, high-speed, and safe connectivity for residents across all urban and rural parts of Maval.",
+        desc: "To develop modern and resilient infrastructure through improved roads, bridges, water supply, public transportation, and smart civic amenities, ensuring balanced growth across both urban and rural areas. Furthermore, the focus remains on building eco-friendly spaces, sustainable urban planning, and creating long-term pathways that elevate the living standards and stimulate economic growth for everyone.",
       },
     ],
     right: [
       {
         title: "Quality Education",
-        desc: "Empowering the next generation by converting Zilla Parishad schools into modern digital classrooms, providing tablets and smart devices, and establishing technology training centers to uplift educational standards across the region.",
+        desc: "To provide access to quality education, skill development, modern technology, and employment-oriented learning opportunities, empowering the next generation to become confident, self-reliant, and future-ready. By bridging the digital divide, integrating e-learning platforms, and fostering innovation, we aim to build a strong foundation for lifelong learning and global competitiveness.",
       },
       {
         title: "Healthcare Services",
-        desc: "Upgrading primary health centers, operating mobile dispensaries in remote villages, organizing mega medical camps, and ensuring seamless access to national health schemes to deliver quality, affordable care to every family.",
+        desc: "To strengthen healthcare infrastructure by ensuring accessible, affordable, and high-quality medical services for every citizen, while enhancing preventive care and modern healthcare facilities in both rural and urban communities. By equipping hospitals with state-of-the-art medical technology and expanding grassroots health campaigns, we are committed to building a healthier, more secure society.",
       },
     ],
   },

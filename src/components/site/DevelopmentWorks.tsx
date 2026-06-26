@@ -116,13 +116,13 @@ export function DevelopmentWorks() {
         </div>
 
         {/* Right: Filters Tabs */}
-        <div className="flex flex-wrap gap-2 md:gap-3">
+        <div className="flex overflow-x-auto gap-2 md:gap-3 pb-2 md:pb-0 w-full md:w-auto md:flex-wrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {tabsList.map((tab) => (
             <button
               suppressHydrationWarning
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 border-2 ${
+              className={`whitespace-nowrap flex-shrink-0 px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 border-2 ${
                 activeTab === tab.key
                   ? "border-saffron text-saffron bg-transparent"
                   : "border-transparent text-muted-foreground hover:text-saffron bg-transparent"

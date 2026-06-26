@@ -90,7 +90,11 @@ export function Navbar() {
               className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-navy text-white z-[70] shadow-2xl flex flex-col"
             >
               <div className="flex items-center justify-between p-6 border-b border-white/10">
-                <img src="/images/logo.webp" alt="Logo" className="h-10 w-10 rounded-full bg-white p-1" />
+                <img
+                  src="/images/logo.webp"
+                  alt="Logo"
+                  className="h-10 w-10 rounded-full bg-white p-1"
+                />
                 <button
                   suppressHydrationWarning
                   onClick={() => setOpen(false)}

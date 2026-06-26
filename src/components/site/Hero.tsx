@@ -11,7 +11,6 @@ import "swiper/css/effect-creative";
 import "swiper/css/pagination";
 import { useT } from "@/lib/i18n";
 
-
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 interface DBImage {
@@ -28,7 +27,11 @@ export function Hero() {
 
   useEffect(() => {
     // Static images from the frontend
-    const staticSlides = ["/images/_DSC3998.JPG (1).webp", "/images/_DSC4007.JPG.webp","/images/hero-image-1-1280.webp"];
+    const staticSlides = [
+      "/images/_DSC3998.JPG (1).webp",
+      "/images/_DSC4007.JPG.webp",
+      "/images/hero-image-1-1280.webp",
+    ];
 
     // Fetch dynamic hero images
     fetch(`${API_BASE}/api/images/hero`)

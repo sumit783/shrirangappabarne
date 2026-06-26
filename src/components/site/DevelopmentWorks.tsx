@@ -9,13 +9,13 @@ import Link from "next/link";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-interface NewsItem {
+interface DevelopmentWorkItem {
   id: number;
   category: string;
   title: string;
   description: string | null;
   image: string | null;
-  news_date: string | null;
+  development_work_date: string | null;
   created_at: string;
 }
 
@@ -38,13 +38,13 @@ export function DevelopmentWorks() {
   const { lang } = useT();
   const [activeTab, setActiveTab] = useState("all");
   const [categories, setCategories] = useState<CategoryItem[]>([]);
-  const [newsList, setNewsList] = useState<NewsItem[]>([]);
+  const [worksList, setWorksList] = useState<DevelopmentWorkItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // Fetch dynamic categories
   useEffect(() => {
-    fetch(`${API_BASE}/api/news/categories?lang=${lang}`)
+    fetch(`${API_BASE}/api/development_work/categories?lang=${lang}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load categories");
         return res.json();
@@ -58,25 +58,25 @@ export function DevelopmentWorks() {
         }
       })
       .catch((err) => {
-        console.error("Error loading news categories:", err);
+        console.error("Error loading categories:", err);
       });
   }, [lang]);
 
-  // Fetch news items
-  const fetchNews = useCallback(async () => {
+  // Fetch works items
+  const fetchWorks = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const url = new URL(`${API_BASE}/api/news/by-category`);
+      const url = new URL(`${API_BASE}/api/development_work/by-category`);
       url.searchParams.set("lang", lang);
       if (activeTab !== "all") {
         url.searchParams.set("category", activeTab);
       }
 
       const res = await fetch(url.toString());
-      if (!res.ok) throw new Error("Failed to load news");
-      const data: NewsItem[] = await res.json();
-      setNewsList(data || []);
+      if (!res.ok) throw new Error("Failed to load works");
+      const data: DevelopmentWorkItem[] = await res.json();
+      setWorksList(data || []);
     } catch (err) {
       setError(
         lang === "mr" ? "माहिती लोड करण्यात अडचण आली." : "Failed to load developments archive.",
@@ -87,11 +87,11 @@ export function DevelopmentWorks() {
   }, [activeTab, lang]);
 
   useEffect(() => {
-    fetchNews();
-  }, [fetchNews]);
+    fetchWorks();
+  }, [fetchWorks]);
 
   // Tabs layout
-  const allLabel = lang === "mr" ? "सर्व घडामोडी" : "All Updates";
+  const allLabel = lang === "mr" ? "सर्व कामे" : "All Works";
   const uniqueMap = new Map<string, CategoryItem>();
   categories.forEach((c) => {
     if (!uniqueMap.has(c.key)) uniqueMap.set(c.key, c);
@@ -100,8 +100,8 @@ export function DevelopmentWorks() {
   const tabsList = [{ key: "all", label: allLabel }, ...uniqueCategories];
 
   // Featured and regular split
-  const featuredItem = newsList[0];
-  const rightItems = newsList.slice(1, 3);
+  const featuredItem = worksList[0];
+  const rightItems = worksList.slice(1, 3);
 
   return (
     <section id="works" className="py-16 md:py-24 container-x bg-white">
@@ -110,7 +110,7 @@ export function DevelopmentWorks() {
         {/* Left: Section Title */}
         <div>
           <h2 className="text-2xl md:text-3xl font-black font-display text-navy tracking-tight uppercase">
-            {lang === "mr" ? "विकासाची कामे आणि घडामोडी" : "Development Works & Press"}
+            {lang === "mr" ? "विकासाची कामे" : "Development Works"}
           </h2>
           <div className="h-[4px] bg-saffron w-24 mt-2" />
         </div>
@@ -147,7 +147,7 @@ export function DevelopmentWorks() {
         <div className="text-center py-20 text-muted-foreground">
           <p>{error}</p>
           <button
-            onClick={fetchNews}
+            onClick={fetchWorks}
             className="mt-4 px-5 py-2 bg-saffron text-white rounded-full font-bold text-sm"
           >
             {lang === "mr" ? "पुन्हा प्रयत्न करा" : "Retry"}
@@ -191,7 +191,7 @@ export function DevelopmentWorks() {
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src =
-                            "https://placehold.co/800x500/1a2754/f97316?text=Shrirang+Appa+Barne";
+                            "https://placehold.co/800x500/1a2754/f97316?text=Development+Work";
                         }}
                       />
                     )
@@ -209,7 +209,10 @@ export function DevelopmentWorks() {
                     <span className="opacity-50">•</span>
                     <span className="text-muted-foreground font-semibold flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
-                      {formatDate(featuredItem.news_date || featuredItem.created_at, lang)}
+                      {formatDate(
+                        featuredItem.development_work_date || featuredItem.created_at,
+                        lang,
+                      )}
                     </span>
                   </div>
 
@@ -225,10 +228,10 @@ export function DevelopmentWorks() {
 
                   <div className="mt-5">
                     <Link
-                      href={`/news/${featuredItem.id}`}
+                      href={`/development-work/${featuredItem.id}`}
                       className="inline-flex items-center gap-1.5 text-saffron font-black text-sm md:text-base hover:gap-2.5 transition-all uppercase tracking-wider"
                     >
-                      {lang === "mr" ? "सविस्तर वाचा" : "Read Article"}
+                      {lang === "mr" ? "सविस्तर वाचा" : "Read More"}
                       <ArrowUpRight className="h-4.5 w-4.5 stroke-[2.5px]" />
                     </Link>
                   </div>
@@ -238,7 +241,7 @@ export function DevelopmentWorks() {
               <div className="text-muted-foreground py-12">
                 {lang === "mr"
                   ? "निवडलेल्या प्रकारात कोणतीही माहिती उपलब्ध नाही."
-                  : "No updates available for the selected category."}
+                  : "No works available for the selected category."}
               </div>
             )}
 
@@ -246,7 +249,7 @@ export function DevelopmentWorks() {
             <div className="flex flex-col gap-4 h-full">
               {rightItems.length > 0
                 ? rightItems.map((m, i) => (
-                    <Link key={m.id} href={`/news/${m.id}`} className="block flex-1">
+                    <Link key={m.id} href={`/development-work/${m.id}`} className="block flex-1">
                       <motion.div
                         layout
                         initial={{ opacity: 0, y: 20 }}
@@ -274,7 +277,7 @@ export function DevelopmentWorks() {
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).src =
-                                    "https://placehold.co/150x100/1a2754/f97316?text=News";
+                                    "https://placehold.co/150x100/1a2754/f97316?text=Work";
                                 }}
                               />
                             )
@@ -295,7 +298,7 @@ export function DevelopmentWorks() {
                           )}
                           <p className="text-[11px] text-muted-foreground font-semibold mt-2 uppercase tracking-wider flex items-center gap-1">
                             <Calendar className="h-2.5 w-2.5" />
-                            {formatDate(m.news_date || m.created_at, lang)}
+                            {formatDate(m.development_work_date || m.created_at, lang)}
                           </p>
                         </div>
                       </motion.div>
@@ -304,8 +307,8 @@ export function DevelopmentWorks() {
                 : featuredItem && (
                     <div className="text-muted-foreground text-sm py-4 border-t border-dashed">
                       {lang === "mr"
-                        ? "इतर कोणतेही वृत्त उपलब्ध नाही."
-                        : "No additional updates to show."}
+                        ? "इतर कोणतीही कामे उपलब्ध नाहीत."
+                        : "No additional works to show."}
                     </div>
                   )}
             </div>
@@ -314,10 +317,10 @@ export function DevelopmentWorks() {
           {/* View All Button */}
           <div className="text-center border-t pt-8">
             <Link
-              href="/news"
+              href="/development-work"
               className="inline-flex items-center gap-2 px-6 py-3 bg-navy hover:bg-navy-soft text-white hover:text-saffron rounded-full font-bold text-sm shadow-md transition-all duration-300"
             >
-              {lang === "mr" ? "सर्व घडामोडी पहा" : "View All Archive"}
+              {lang === "mr" ? "सर्व कामे पहा" : "View All Works"}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>

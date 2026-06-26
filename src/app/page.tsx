@@ -6,6 +6,7 @@ import { InfoCard } from "@/components/site/InfoCard";
 import { About } from "@/components/site/About";
 import { VisionMission } from "@/components/site/VisionMission";
 import { DevelopmentWorks } from "@/components/site/DevelopmentWorks";
+import { NewsSection } from "@/components/site/NewsSection";
 import { Gallery } from "@/components/site/Gallery";
 import { SocialMedia } from "@/components/site/SocialMedia";
 import { News } from "@/components/site/News";
@@ -37,6 +38,7 @@ export default function Home() {
         <InfoCard />
         <About />
         <DevelopmentWorks />
+        <NewsSection />
         <VisionMission />
         {/* <Constituency /> */}
         <Gallery />

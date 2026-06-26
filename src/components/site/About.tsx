@@ -35,7 +35,7 @@ export function About() {
         >
           <div className="absolute -inset-4 bg-gradient-saffron rounded-3xl rotate-3" />
           <img
-            src={portraitImg.src}
+            src="images/strip photo.webp"
             alt={t("hero.title")}
             loading="lazy"
             width={1024}

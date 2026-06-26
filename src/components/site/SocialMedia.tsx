@@ -76,7 +76,7 @@ export function SocialMedia() {
               </div>
               <div className="fty-content">
                 <div
-                  className="elfsight-app-519d4301-19d9-43dc-a329-b02ccb604e2b"
+                  className="elfsight-app-ea23ec5d-f206-4885-b6b7-af553df5b443"
                   data-elfsight-app-lazy="true"
                 ></div>
               </div>

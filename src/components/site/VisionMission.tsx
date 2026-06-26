@@ -101,7 +101,7 @@ export function VisionMission() {
           <div className="hidden lg:block order-2">
             <div className="relative w-full flex justify-center">
               <img
-                src={cutoutImg.src}
+                src="images/strip photo.webp"
                 alt={t("hero.title")}
                 loading="lazy"
                 className="w-full max-w-[360px] xl:max-w-[400px] object-contain"

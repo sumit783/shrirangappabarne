@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
-import logo from "@/assets/logo.png";
+
 import { useT } from "@/lib/i18n";
 import { LanguageToggle } from "./LanguageToggle";
 import Link from "next/link";
@@ -40,7 +40,7 @@ export function Navbar() {
         <div className="container-x flex items-center justify-between h-16 md:h-20">
           <Link href="/" className="flex items-center gap-3">
             <img
-              src={logo.src}
+              src="/images/logo.webp"
               alt="Logo"
               className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-white p-1 shadow"
             />
@@ -90,7 +90,7 @@ export function Navbar() {
               className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-navy text-white z-[70] shadow-2xl flex flex-col"
             >
               <div className="flex items-center justify-between p-6 border-b border-white/10">
-                <img src={logo.src} alt="Logo" className="h-10 w-10 rounded-full bg-white p-1" />
+                <img src="/images/logo.webp" alt="Logo" className="h-10 w-10 rounded-full bg-white p-1" />
                 <button
                   suppressHydrationWarning
                   onClick={() => setOpen(false)}

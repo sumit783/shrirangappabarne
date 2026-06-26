@@ -1,5 +1,5 @@
 import { Instagram, Facebook, Twitter, Youtube, Phone, Mail, MapPin } from "lucide-react";
-import logo from "@/assets/logo.png";
+
 import { useT } from "@/lib/i18n";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ export function Footer() {
       <div className="container-x grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-3">
-            <img src={logo.src} alt="" className="h-12 w-12 rounded-full bg-white p-1" />
+            <img src="/images/logo.webp" alt="" className="h-12 w-12 rounded-full bg-white p-1" />
             <div className="font-semibold">
               श्री श्रीरंग आप्पा बारणे
               <div className="text-xs opacity-70">Member of Parliament</div>

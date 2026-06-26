@@ -7,14 +7,17 @@ const timeline = {
     { y: "२०१९", t: "१७ व्या लोकसभेसाठी पुन्हा निवडून आले" },
     { y: "२०२०", t: "‘संसद महारत्न’ पुरस्काराने सन्मानित" },
     { y: "२०२४", t: "सलग तिसऱ्यांदा १८व्या लोकसभेसाठी खासदार म्हणून निवड" },
-    { y: "२०२५", t: "विशेष संसदरत्न पुरस्काराने सन्मानित" }
+    { y: "२०२५", t: "विशेष संसदरत्न पुरस्काराने सन्मानित" },
   ],
   en: [
-  { y: "2019", t: "Re-elected to the 17th Lok Sabha" },
-  { y: "2020", t: "Honoured with the Sansad Maharatna Award" },
-  { y: "2024", t: "Elected as a Member of Parliament to the 18th Lok Sabha for a third consecutive term" },
-  { y: "2025", t: "Honoured with the Special Sansad Ratna Award" }
-],
+    { y: "2019", t: "Re-elected to the 17th Lok Sabha" },
+    { y: "2020", t: "Honoured with the Sansad Maharatna Award" },
+    {
+      y: "2024",
+      t: "Elected as a Member of Parliament to the 18th Lok Sabha for a third consecutive term",
+    },
+    { y: "2025", t: "Honoured with the Special Sansad Ratna Award" },
+  ],
 };
 
 export function About() {

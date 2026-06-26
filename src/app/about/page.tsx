@@ -238,7 +238,7 @@ export default function AboutPage() {
               <div className="absolute -inset-4 bg-gradient-saffron rounded-3xl opacity-30 blur-lg" />
               <div className="relative rounded-3xl overflow-hidden border bg-background p-2 shadow-2xl">
                 <img
-                  src={portraitImg.src}
+                  src="images/strip photo.webp"
                   alt={t("hero.title")}
                   loading="lazy"
                   className="rounded-2xl w-full object-cover shadow"

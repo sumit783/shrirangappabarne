@@ -16,21 +16,21 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 interface DBImage {
   id: number;
   image: string;
-  isHeroSelectionImage: number;
+  isHeroSelectionImage?: number;
   title: string | null;
   created_at: string;
 }
 
 export function Hero() {
   const { t } = useT();
-  const [slides, setSlides] = useState<string[]>([]);
+  const [slides, setSlides] = useState<{ desktop: string; mobile?: string }[]>([]);
 
   useEffect(() => {
     // Static images from the frontend
     const staticSlides = [
-      "/images/_DSC3998.JPG (1).webp",
-      "/images/_DSC4007.JPG.webp",
-      "/images/hero-image-1-1280.webp",
+      { desktop: "/images/_DSC3998.JPG (1).webp", mobile: "/images/heroImage1-phone.jpg" },
+      { desktop: "/images/_DSC4007.JPG.webp", mobile: "/images/heroImage2-phone.jpg" },
+      { desktop: "/images/hero-image-1-1280.webp", mobile: "/images/hero-image3-phone.jpg" },
     ];
 
     // Fetch dynamic hero images
@@ -45,7 +45,7 @@ export function Hero() {
       .then((data: DBImage[]) => {
         const dbSlides = (data || [])
           .filter((item) => item.image)
-          .map((item) => getMediaUrl(item.image));
+          .map((item) => ({ desktop: getMediaUrl(item.image) }));
 
         // Combine static frontend slides first, then dynamic ones
         setSlides([...staticSlides, ...dbSlides]);
@@ -78,17 +78,31 @@ export function Hero() {
           pagination={{ clickable: true }}
           className="h-full w-full"
         >
-          {slides.map((src, i) => (
+          {slides.map((slide, i) => (
             <SwiperSlide key={i}>
               <div className="relative h-full w-full overflow-hidden">
-                <Image
-                  src={src}
-                  alt="Hero slide"
-                  className="object-cover hero-zoom-img"
-                  fill
-                  priority={i === 0}
-                  sizes="100vw"
-                />
+                {slide.mobile && (
+                  <div className="md:hidden relative w-full h-full">
+                    <Image
+                      src={slide.mobile}
+                      alt="Hero slide mobile"
+                      className="object-cover hero-zoom-img"
+                      fill
+                      priority={i === 0}
+                      sizes="100vw"
+                    />
+                  </div>
+                )}
+                <div className={`${slide.mobile ? 'hidden md:block' : ''} relative w-full h-full`}>
+                  <Image
+                    src={slide.desktop}
+                    alt="Hero slide desktop"
+                    className="object-cover hero-zoom-img"
+                    fill
+                    priority={i === 0}
+                    sizes="100vw"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-hero" />
               </div>
             </SwiperSlide>

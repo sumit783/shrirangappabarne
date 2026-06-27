@@ -93,7 +93,7 @@ export function Hero() {
                     />
                   </div>
                 )}
-                <div className={`${slide.mobile ? 'hidden md:block' : ''} relative w-full h-full`}>
+                <div className={`${slide.mobile ? "hidden md:block" : ""} relative w-full h-full`}>
                   <Image
                     src={slide.desktop}
                     alt="Hero slide desktop"

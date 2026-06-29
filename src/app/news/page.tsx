@@ -3,7 +3,15 @@ import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Calendar, ArrowRight, Newspaper, Loader2, AlertCircle, FolderOpen } from "lucide-react";
+import {
+  Search,
+  Calendar,
+  ArrowRight,
+  Newspaper,
+  Loader2,
+  AlertCircle,
+  FolderOpen,
+} from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
@@ -37,7 +45,15 @@ function formatDate(dateStr: string | null, lang: "mr" | "en"): string {
   });
 }
 
-function CategoryCard({ data, lang, index }: { data: CategoryCardData; lang: "mr" | "en"; index: number }) {
+function CategoryCard({
+  data,
+  lang,
+  index,
+}: {
+  data: CategoryCardData;
+  lang: "mr" | "en";
+  index: number;
+}) {
   const { category, label, newsItem } = data;
   const placeholder = `https://placehold.co/800x450/1a2754/f97316?text=${encodeURIComponent(label)}`;
 
@@ -100,7 +116,9 @@ function CategoryCard({ data, lang, index }: { data: CategoryCardData; lang: "mr
             </>
           ) : (
             <p className="text-sm text-muted-foreground italic flex-1">
-              {lang === "mr" ? "या प्रकारात कोणतीही बातमी उपलब्ध नाही." : "No news available in this category."}
+              {lang === "mr"
+                ? "या प्रकारात कोणतीही बातमी उपलब्ध नाही."
+                : "No news available in this category."}
             </p>
           )}
 
@@ -235,11 +253,12 @@ export default function NewsPage() {
           if (!res.ok) throw new Error("Failed to fetch categories");
           const data = await res.json();
           const cats = data.categories || [];
-          
+
           // Generate { key, label } format
-          const catList: {key: string, label: string}[] = cats.length > 0 && typeof cats[0] === "string" 
-            ? cats.map((c: string) => ({ key: c, label: c }))
-            : cats;
+          const catList: { key: string; label: string }[] =
+            cats.length > 0 && typeof cats[0] === "string"
+              ? cats.map((c: string) => ({ key: c, label: c }))
+              : cats;
 
           // Fetch the latest news for each category
           const cards = await Promise.all(
@@ -249,20 +268,24 @@ export default function NewsPage() {
               const url = new URL(`${API_BASE}/api/news/by-category`);
               url.searchParams.set("lang", lang);
               url.searchParams.set("limit", "1"); // Only need the latest one
-              
+
               const urlString = url.toString() + `&category=${encodeURIComponent(cat)}`;
-              
+
               try {
                 const nRes = await fetch(urlString);
                 const nResData = await nRes.json();
                 const items = nResData.data || nResData;
-                return { category: cat, label, newsItem: Array.isArray(items) && items.length > 0 ? items[0] : null };
+                return {
+                  category: cat,
+                  label,
+                  newsItem: Array.isArray(items) && items.length > 0 ? items[0] : null,
+                };
               } catch {
                 return { category: cat, label, newsItem: null };
               }
-            })
+            }),
           );
-          
+
           setCategoryCards(cards);
           setTotalPages(1); // No pagination for categories view
         }
@@ -369,8 +392,8 @@ export default function NewsPage() {
               </h3>
               <p className="text-muted-foreground text-sm">
                 {lang === "mr"
-                    ? `"${debouncedSearch}" साठी कोणतेही निकाल मिळाले नाहीत.`
-                    : `No results matching "${debouncedSearch}".`}
+                  ? `"${debouncedSearch}" साठी कोणतेही निकाल मिळाले नाहीत.`
+                  : `No results matching "${debouncedSearch}".`}
               </p>
             </div>
           )}
@@ -390,10 +413,7 @@ export default function NewsPage() {
                 </motion.div>
               ) : (
                 // Display category cards when not searching
-                <motion.div
-                  key="categories"
-                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
+                <motion.div key="categories" className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                   {categoryCards.map((card, i) => (
                     <CategoryCard key={card.category} data={card} lang={lang} index={i} />
                   ))}

@@ -3,7 +3,15 @@ import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Calendar, ArrowRight, Newspaper, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
+import {
+  Search,
+  Calendar,
+  ArrowRight,
+  Newspaper,
+  Loader2,
+  AlertCircle,
+  ArrowLeft,
+} from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
@@ -104,7 +112,7 @@ export default function CategoryNewsPage() {
   const params = useParams();
   const rawCategory = params.category as string;
   const category = decodeURIComponent(rawCategory || "");
-  
+
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -119,9 +127,11 @@ export default function CategoryNewsPage() {
       .then((res) => res.json())
       .then((data) => {
         const cats = data.categories || [];
-        const match = cats.find((c: any) => typeof c === 'object' ? c.key === category : c === category);
+        const match = cats.find((c: { key: string; label: string } | string) =>
+          typeof c === "object" ? c.key === category : c === category
+        );
         if (match) {
-          setCategoryLabel(typeof match === 'object' ? match.label : match);
+          setCategoryLabel(typeof match === "object" ? match.label : match);
         }
       })
       .catch(console.error);
@@ -143,11 +153,11 @@ export default function CategoryNewsPage() {
       url.searchParams.set("lang", lang);
       url.searchParams.set("page", "1");
       url.searchParams.set("limit", "1000"); // Fetch all news
-      
+
       // We manually append category to ensure %20 is used instead of + for spaces,
       // as some backends fail to decode + properly in query strings.
       let urlString = url.toString() + `&category=${encodeURIComponent(category)}`;
-      
+
       if (debouncedSearch) {
         urlString += `&search=${encodeURIComponent(debouncedSearch)}`;
       }
@@ -181,11 +191,16 @@ export default function CategoryNewsPage() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-saffron/10 rounded-full blur-[100px] pointer-events-none -mr-40 -mt-40" />
 
         <div className="container-x relative z-10">
-          <Link href="/news" className="inline-flex items-center gap-2 text-white/70 hover:text-white transition mb-6">
+          <Link
+            href="/news"
+            className="inline-flex items-center gap-2 text-white/70 hover:text-white transition mb-6"
+          >
             <ArrowLeft className="h-4 w-4" />
-            <span className="text-sm font-semibold uppercase tracking-wider">{lang === "mr" ? "सर्व घडामोडींकडे परत" : "Back to All Categories"}</span>
+            <span className="text-sm font-semibold uppercase tracking-wider">
+              {lang === "mr" ? "सर्व घडामोडींकडे परत" : "Back to All Categories"}
+            </span>
           </Link>
-          
+
           <div className="text-center mt-2">
             <motion.span
               initial={{ opacity: 0, y: 10 }}
@@ -216,7 +231,9 @@ export default function CategoryNewsPage() {
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder={lang === "mr" ? "या प्रकारात शोधा..." : `Search in ${categoryLabel}...`}
+                  placeholder={
+                    lang === "mr" ? "या प्रकारात शोधा..." : `Search in ${categoryLabel}...`
+                  }
                   className="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 rounded-full py-3.5 pl-12 pr-5 focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition"
                 />
               </div>

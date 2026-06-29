@@ -3,7 +3,7 @@ import { getMediaUrl } from "@/lib/utils";
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Calendar, ArrowRight, Newspaper, Loader2, AlertCircle } from "lucide-react";
+import { Search, Calendar, ArrowRight, Newspaper, Loader2, AlertCircle, FolderOpen } from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
@@ -21,9 +21,10 @@ interface NewsItem {
   created_at: string;
 }
 
-interface CategoryItem {
-  key: string;
+interface CategoryCardData {
+  category: string;
   label: string;
+  newsItem: NewsItem | null;
 }
 
 function formatDate(dateStr: string | null, lang: "mr" | "en"): string {
@@ -36,6 +37,83 @@ function formatDate(dateStr: string | null, lang: "mr" | "en"): string {
   });
 }
 
+function CategoryCard({ data, lang, index }: { data: CategoryCardData; lang: "mr" | "en"; index: number }) {
+  const { category, label, newsItem } = data;
+  const placeholder = `https://placehold.co/800x450/1a2754/f97316?text=${encodeURIComponent(label)}`;
+
+  return (
+    <Link href={`/news/category/${encodeURIComponent(category)}`}>
+      <motion.article
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.45, delay: index * 0.05 }}
+        className="group bg-card border rounded-3xl overflow-hidden hover:shadow-elegant hover:border-saffron transition-all duration-300 flex flex-col h-full cursor-pointer"
+      >
+        <div className="relative h-48 overflow-hidden bg-secondary/30">
+          {newsItem?.image &&
+          (newsItem.image.match(/\.(mp4|webm|ogg|mov)$/i) || newsItem.image.includes("video")) ? (
+            <video
+              src={getMediaUrl(newsItem.image)}
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          ) : (
+            <img
+              src={newsItem?.image ? getMediaUrl(newsItem.image) : placeholder}
+              alt={label}
+              loading="lazy"
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = placeholder;
+              }}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+            <h2 className="text-xl font-bold text-white font-display uppercase tracking-wide group-hover:text-saffron transition-colors">
+              {label}
+            </h2>
+            <div className="bg-saffron text-white rounded-full p-2 group-hover:scale-110 transition-transform">
+              <FolderOpen className="h-4 w-4" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col flex-1 p-5 bg-card">
+          {newsItem ? (
+            <>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                <span className="font-semibold text-saffron uppercase tracking-wider text-[10px]">
+                  {lang === "mr" ? "ताज्या घडामोडी" : "Latest Update"}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-border" />
+                <Calendar className="h-3.5 w-3.5" />
+                {formatDate(newsItem.news_date || newsItem.created_at, lang)}
+              </div>
+              <p className="text-sm font-semibold text-navy leading-snug line-clamp-2 mb-2 group-hover:text-saffron transition-colors">
+                {newsItem.title}
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-muted-foreground italic flex-1">
+              {lang === "mr" ? "या प्रकारात कोणतीही बातमी उपलब्ध नाही." : "No news available in this category."}
+            </p>
+          )}
+
+          <div className="mt-auto pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-muted-foreground group-hover:text-saffron transition-colors">
+            <span>{lang === "mr" ? "सर्व बातम्या पहा" : "View All News"}</span>
+            <ArrowRight className="h-4 w-4" />
+          </div>
+        </div>
+      </motion.article>
+    </Link>
+  );
+}
+
 function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; index: number }) {
   const displayDate = formatDate(item.news_date || item.created_at, lang);
   const placeholder = `https://placehold.co/800x450/1a2754/f97316?text=${encodeURIComponent(item.title.substring(0, 20))}`;
@@ -46,9 +124,8 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.45, delay: index * 0.05 }}
-      className="group bg-card border rounded-3xl overflow-hidden hover:shadow-elegant hover:border-saffron transition-all duration-300 flex flex-col"
+      className="group bg-card border rounded-3xl overflow-hidden hover:shadow-elegant hover:border-saffron transition-all duration-300 flex flex-col h-full"
     >
-      {/* Cover image */}
       <div className="relative h-52 overflow-hidden bg-secondary/30">
         {item.image &&
         (item.image.match(/\.(mp4|webm|ogg|mov)$/i) || item.image.includes("video")) ? (
@@ -76,27 +153,22 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
         </span>
       </div>
 
-      {/* Content */}
       <div className="flex flex-col flex-1 p-6">
-        {/* Meta */}
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
           <Calendar className="h-3.5 w-3.5 text-saffron" />
           {displayDate}
         </div>
 
-        {/* Title */}
         <h2 className="text-lg md:text-xl font-bold text-navy font-display leading-snug group-hover:text-saffron transition line-clamp-2">
           {item.title}
         </h2>
 
-        {/* Description Excerpt */}
         {item.description && (
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-3 flex-1">
             {item.description}
           </p>
         )}
 
-        {/* Read more link */}
         <Link
           href={`/news/${item.id}`}
           className="mt-5 inline-flex items-center gap-1.5 text-saffron font-semibold text-sm hover:gap-3 transition-all"
@@ -111,9 +183,8 @@ function NewsCard({ item, lang, index }: { item: NewsItem; lang: "mr" | "en"; in
 
 export default function NewsPage() {
   const { lang } = useT();
-  const [newsList, setNewsList] = useState<NewsItem[]>([]);
-  const [categories, setCategories] = useState<CategoryItem[]>([]);
-  const [activeTab, setActiveTab] = useState("all");
+  const [categoryCards, setCategoryCards] = useState<CategoryCardData[]>([]);
+  const [searchResults, setSearchResults] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -127,70 +198,84 @@ export default function NewsPage() {
     return () => clearTimeout(t);
   }, [search]);
 
-  // Reset page when search or tab changes
+  // Reset page when search changes
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearch, activeTab]);
+  }, [debouncedSearch]);
 
-  // Fetch categories
+  // Fetch either categories or search results
   useEffect(() => {
-    fetch(`${API_BASE}/api/news/categories?lang=${lang}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch categories");
-        return res.json();
-      })
-      .then((data: { categories: CategoryItem[] | string[] }) => {
-        const cats = data.categories || [];
-        if (cats.length > 0 && typeof cats[0] === "string") {
-          setCategories((cats as string[]).map((c) => ({ key: c, label: c })));
+    async function fetchData() {
+      setLoading(true);
+      setError(null);
+
+      try {
+        if (debouncedSearch) {
+          // If searching, fetch matching news articles across all categories
+          const url = new URL(`${API_BASE}/api/news/by-category`);
+          url.searchParams.set("lang", lang);
+          url.searchParams.set("page", page.toString());
+          url.searchParams.set("limit", "9");
+          url.searchParams.set("search", debouncedSearch);
+
+          const res = await fetch(url.toString());
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const responseData = await res.json();
+
+          if (responseData && "data" in responseData) {
+            setSearchResults(responseData.data);
+            setTotalPages(responseData.totalPages || 1);
+          } else {
+            setSearchResults(Array.isArray(responseData) ? responseData : []);
+            setTotalPages(1);
+          }
         } else {
-          setCategories(cats as CategoryItem[]);
+          // If not searching, fetch categories and their latest news
+          const res = await fetch(`${API_BASE}/api/news/categories?lang=${lang}`);
+          if (!res.ok) throw new Error("Failed to fetch categories");
+          const data = await res.json();
+          const cats = data.categories || [];
+          
+          // Generate { key, label } format
+          const catList: {key: string, label: string}[] = cats.length > 0 && typeof cats[0] === "string" 
+            ? cats.map((c: string) => ({ key: c, label: c }))
+            : cats;
+
+          // Fetch the latest news for each category
+          const cards = await Promise.all(
+            catList.map(async (catObj) => {
+              const cat = catObj.key;
+              const label = catObj.label || cat;
+              const url = new URL(`${API_BASE}/api/news/by-category`);
+              url.searchParams.set("lang", lang);
+              url.searchParams.set("limit", "1"); // Only need the latest one
+              
+              const urlString = url.toString() + `&category=${encodeURIComponent(cat)}`;
+              
+              try {
+                const nRes = await fetch(urlString);
+                const nResData = await nRes.json();
+                const items = nResData.data || nResData;
+                return { category: cat, label, newsItem: Array.isArray(items) && items.length > 0 ? items[0] : null };
+              } catch {
+                return { category: cat, label, newsItem: null };
+              }
+            })
+          );
+          
+          setCategoryCards(cards);
+          setTotalPages(1); // No pagination for categories view
         }
-      })
-      .catch((err) => console.error("Error categories:", err));
-  }, [lang]);
-
-  // Fetch news items
-  const fetchNews = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const url = new URL(`${API_BASE}/api/news/by-category`);
-      url.searchParams.set("lang", lang);
-      url.searchParams.set("page", page.toString());
-      url.searchParams.set("limit", "9");
-
-      if (activeTab !== "all") {
-        url.searchParams.set("category", activeTab);
+      } catch (err) {
+        console.error(err);
+        setError(lang === "mr" ? "घडामोडी लोड करण्यात त्रुटी आली." : "Failed to load content.");
+      } finally {
+        setLoading(false);
       }
-      if (debouncedSearch) {
-        url.searchParams.set("search", debouncedSearch);
-      }
-
-      const res = await fetch(url.toString());
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const responseData = await res.json();
-
-      if (responseData && "data" in responseData) {
-        setNewsList(responseData.data);
-        setTotalPages(responseData.totalPages || 1);
-      } else {
-        setNewsList(Array.isArray(responseData) ? responseData : []);
-        setTotalPages(1);
-      }
-    } catch (err) {
-      setError(lang === "mr" ? "घडामोडी लोड करण्यात त्रुटी आली." : "Failed to load news articles.");
-    } finally {
-      setLoading(false);
     }
-  }, [activeTab, debouncedSearch, lang, page]);
 
-  useEffect(() => {
-    fetchNews();
-  }, [fetchNews]);
-
-  const allLabel = lang === "mr" ? "सर्व घडामोडी" : "All Updates";
-  const tabsList = [{ key: "all", label: allLabel }, ...categories];
+    fetchData();
+  }, [debouncedSearch, lang, page]);
 
   return (
     <div className="bg-background min-h-screen flex flex-col">
@@ -248,34 +333,6 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* Categories Filter Tabs */}
-      <div className="border-b bg-card">
-        <div
-          className="container-x py-4 flex flex-nowrap overflow-x-auto gap-3 items-center"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          <style>{`
-            .container-x::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-          {tabsList.map((tab) => (
-            <button
-              suppressHydrationWarning
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 rounded-full text-xs md:text-sm font-bold transition-all duration-300 border-2 whitespace-nowrap flex-shrink-0 ${
-                activeTab === tab.key
-                  ? "border-saffron text-saffron bg-transparent"
-                  : "border-transparent text-muted-foreground hover:text-saffron bg-transparent"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Grid container */}
       <main className="flex-grow py-16">
         <div className="container-x">
@@ -284,7 +341,7 @@ export default function NewsPage() {
             <div className="flex flex-col items-center justify-center py-32 gap-4">
               <Loader2 className="h-10 w-10 text-saffron animate-spin" />
               <p className="text-muted-foreground text-sm">
-                {lang === "mr" ? "लोड होत आहे..." : "Loading articles..."}
+                {lang === "mr" ? "लोड होत आहे..." : "Loading content..."}
               </p>
             </div>
           )}
@@ -295,7 +352,7 @@ export default function NewsPage() {
               <AlertCircle className="h-12 w-12 text-destructive" />
               <p className="text-muted-foreground">{error}</p>
               <button
-                onClick={fetchNews}
+                onClick={() => setPage(1)}
                 className="px-6 py-2.5 bg-gradient-saffron text-white rounded-full font-semibold text-sm shadow-saffron hover:scale-105 transition"
               >
                 {lang === "mr" ? "पुन्हा प्रयत्न करा" : "Try Again"}
@@ -303,41 +360,50 @@ export default function NewsPage() {
             </div>
           )}
 
-          {/* Empty */}
-          {!loading && !error && newsList.length === 0 && (
+          {/* Empty Search Results */}
+          {!loading && !error && debouncedSearch && searchResults.length === 0 && (
             <div className="flex flex-col items-center justify-center py-32 gap-4 text-center">
               <Newspaper className="h-12 w-12 text-saffron/40" />
               <h3 className="text-xl font-bold text-navy">
                 {lang === "mr" ? "कोणतीही बातमी सापडली नाही" : "No news articles found"}
               </h3>
               <p className="text-muted-foreground text-sm">
-                {debouncedSearch
-                  ? lang === "mr"
+                {lang === "mr"
                     ? `"${debouncedSearch}" साठी कोणतेही निकाल मिळाले नाहीत.`
-                    : `No results matching "${debouncedSearch}".`
-                  : lang === "mr"
-                    ? "या प्रकारात अद्याप कोणतीही बातमी उपलब्ध नाही."
-                    : "No updates published in this category yet."}
+                    : `No results matching "${debouncedSearch}".`}
               </p>
             </div>
           )}
 
-          {/* Results grid */}
-          {!loading && !error && newsList.length > 0 && (
+          {/* Content Grid */}
+          {!loading && !error && (
             <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab + debouncedSearch + page}
-                className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
-              >
-                {newsList.map((item, i) => (
-                  <NewsCard key={item.id} item={item} lang={lang} index={i} />
-                ))}
-              </motion.div>
+              {debouncedSearch ? (
+                // Display search results as regular news cards
+                <motion.div
+                  key={"search" + debouncedSearch + page}
+                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  {searchResults.map((item, i) => (
+                    <NewsCard key={item.id} item={item} lang={lang} index={i} />
+                  ))}
+                </motion.div>
+              ) : (
+                // Display category cards when not searching
+                <motion.div
+                  key="categories"
+                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  {categoryCards.map((card, i) => (
+                    <CategoryCard key={card.category} data={card} lang={lang} index={i} />
+                  ))}
+                </motion.div>
+              )}
             </AnimatePresence>
           )}
 
-          {/* Pagination */}
-          {!loading && !error && totalPages > 1 && (
+          {/* Pagination (only for search results) */}
+          {!loading && !error && debouncedSearch && totalPages > 1 && (
             <div className="mt-12 flex justify-center items-center gap-4">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}

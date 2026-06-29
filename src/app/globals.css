@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@source "../";
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-saffron: var(--saffron);
+  --color-saffron-deep: var(--saffron-deep);
+  --color-saffron-foreground: var(--saffron-foreground);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --font-display: "Tiro Devanagari Marathi", "Noto Serif Devanagari", serif;
+  --font-sans: "Noto Sans Devanagari", "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Saffron-led palette inspired by reference site */
+  --saffron: oklch(0.72 0.19 48);          /* #F26522-ish */
+  --saffron-deep: oklch(0.58 0.21 38);     /* deeper orange */
+  --saffron-foreground: oklch(0.99 0.01 80);
+  --cream: oklch(0.985 0.015 80);
+  --ink: oklch(0.22 0.03 50);
+
+  --background: oklch(0.99 0.008 80);
+  --foreground: oklch(0.22 0.03 50);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.03 50);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.03 50);
+  --primary: oklch(0.72 0.19 48);
+  --primary-foreground: oklch(0.99 0.01 80);
+  --secondary: oklch(0.96 0.02 70);
+  --secondary-foreground: oklch(0.25 0.03 50);
+  --muted: oklch(0.96 0.015 75);
+  --muted-foreground: oklch(0.5 0.03 55);
+  --accent: oklch(0.92 0.06 70);
+  --accent-foreground: oklch(0.25 0.05 45);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.99 0.01 80);
+  --border: oklch(0.9 0.02 70);
+  --input: oklch(0.92 0.02 70);
+  --ring: oklch(0.72 0.19 48);
+
+  --gradient-saffron: linear-gradient(135deg, var(--saffron-deep), var(--saffron));
+  --gradient-hero-overlay: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--ink) 78%, transparent) 0%,
+    color-mix(in oklab, var(--ink) 45%, transparent) 55%,
+    transparent 100%
+  );
+  --shadow-elevated: 0 20px 50px -25px color-mix(in oklab, var(--saffron-deep) 55%, transparent);
+}
+
+.dark {
+  --background: oklch(0.18 0.03 50);
+  --foreground: oklch(0.97 0.01 80);
+  --card: oklch(0.22 0.03 50);
+  --card-foreground: oklch(0.97 0.01 80);
+  --popover: oklch(0.22 0.03 50);
+  --popover-foreground: oklch(0.97 0.01 80);
+  --primary: oklch(0.78 0.18 50);
+  --primary-foreground: oklch(0.18 0.03 50);
+  --secondary: oklch(0.28 0.03 50);
+  --secondary-foreground: oklch(0.97 0.01 80);
+  --muted: oklch(0.28 0.03 50);
+  --muted-foreground: oklch(0.75 0.02 70);
+  --accent: oklch(0.35 0.06 50);
+  --accent-foreground: oklch(0.97 0.01 80);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility chip-divider {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  &::before,
+  &::after {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: color-mix(in oklab, var(--saffron) 60%, transparent);
+  }
+}
+
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@utility animate-marquee {
+  animation: marquee-x 38s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  70% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@utility pulse-ring {
+  animation: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+

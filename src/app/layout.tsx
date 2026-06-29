@@ -1,66 +1,34 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, Noto_Sans_Devanagari, Playfair_Display } from "next/font/google";
-import { LanguageProvider } from "@/lib/i18n";
-import "@/styles.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const notoDevanagari = Noto_Sans_Devanagari({
-  subsets: ["devanagari"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-marathi",
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-display",
-  display: "swap",
-});
+import type { Metadata } from 'next';
+import './globals.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
-  title: "श्री श्रीरंग आप्पा बारणे — खासदार, मावळ लोकसभा मतदारसंघ",
-  description:
-    "Shri Shrirang Appa Barne — Three-time Member of Parliament from Maval Lok Sabha constituency. Sansad Ratna awardee committed to inclusive development.",
-  keywords: [
-    "Shrirang Barne",
-    "Maval MP",
-    "Member of Parliament",
-    "Pimpri Chinchwad",
-    "Lok Sabha",
-    "Sansad Ratna",
-  ],
+  title: 'Shrirang Appa Barne — Member of Parliament, Maval',
+  description: 'Official site of Shrirang Appa Barne, three-time Member of Parliament from Maval Lok Sabha constituency. Sansad Ratna awardee committed to development and public service.',
   openGraph: {
-    title: "Shri Shrirang Appa Barne — Member of Parliament, Maval",
-    description: "Three-time MP committed to the holistic development of Maval constituency.",
-    type: "website",
-    url: "/",
-    siteName: "Shrirang Appa Barne",
+    title: 'Shrirang Appa Barne — MP, Maval',
+    description: 'Jantecha vishwas, vikasacha nirdhar — Shrirang Appa Barne.',
+    type: 'website'
   },
   twitter: {
-    card: "summary_large_image",
-  },
-  icons: {
-    icon: "/images/logo.webp",
-  },
+    card: 'summary_large_image'
+  }
 };
 
-export const viewport: Viewport = {
-  themeColor: "#1a2754",
-  width: "device-width",
-  initialScale: 1,
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoDevanagari.variable} ${playfair.variable}`}>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" />
+      </head>
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

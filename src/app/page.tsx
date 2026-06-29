@@ -1,54 +1,27 @@
-"use client";
-
-import { Navbar } from "@/components/site/Navbar";
-import { Hero } from "@/components/site/Hero";
-import { InfoCard } from "@/components/site/InfoCard";
-import { About } from "@/components/site/About";
-import { VisionMission } from "@/components/site/VisionMission";
-import { DevelopmentWorks } from "@/components/site/DevelopmentWorks";
-import { NewsSection } from "@/components/site/NewsSection";
-import { Gallery } from "@/components/site/Gallery";
-import { SocialMedia } from "@/components/site/SocialMedia";
-import { News } from "@/components/site/News";
-import { Contact } from "@/components/site/Contact";
-import { Footer } from "@/components/site/Footer";
-import { Toaster } from "@/components/ui/sonner";
+import { Header } from "@/components/homePage/Header";
+import { HeroSection } from "@/components/homePage/HeroSection";
+import { ConstituencySection } from "@/components/homePage/ConstituencySection";
+import { AboutSection } from "@/components/homePage/AboutSection";
+import { WorkAreasSection } from "@/components/homePage/WorkAreasSection";
+import { VideosSection } from "@/components/homePage/VideosSection";
+import { NewsSection } from "@/components/homePage/NewsSection";
+import { AchievementsSection } from "@/components/homePage/AchievementsSection";
+import { ContactSection } from "@/components/homePage/ContactSection";
+import { Footer } from "@/components/homePage/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-background">
-      {/* Schema.org structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Shrirang Appa Barne",
-            jobTitle: "Member of Parliament",
-            affiliation: "Lok Sabha, Maval Constituency",
-            url: "/",
-            sameAs: ["https://instagram.com", "https://facebook.com", "https://twitter.com"],
-          }),
-        }}
-      />
-      <Navbar />
-      <main>
-        <Hero />
-        <InfoCard />
-        <About />
-        <DevelopmentWorks />
-        <NewsSection />
-        <VisionMission />
-        {/* <Constituency /> */}
-        <Gallery />
-        <SocialMedia />
-        <News />
-        {/* <Books /> */}
-        <Contact />
-      </main>
+    <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      <HeroSection />
+      <ConstituencySection />
+      <VideosSection />
+      <WorkAreasSection />
+      <AboutSection />
+      <NewsSection />
+      <AchievementsSection />
+      <ContactSection />
       <Footer />
-      <Toaster position="top-right" richColors />
     </div>
   );
 }

@@ -128,7 +128,7 @@ export default function CategoryNewsPage() {
       .then((data) => {
         const cats = data.categories || [];
         const match = cats.find((c: { key: string; label: string } | string) =>
-          typeof c === "object" ? c.key === category : c === category
+          typeof c === "object" ? c.key === category : c === category,
         );
         if (match) {
           setCategoryLabel(typeof match === "object" ? match.label : match);

@@ -16,7 +16,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 export default function Home() {
   return (
-    <div className="bg-background">
+    <div>
       {/* Schema.org structured data */}
       <script
         type="application/ld+json"
@@ -35,7 +35,6 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <InfoCard />
         <About />
         <DevelopmentWorks />
         <NewsSection />

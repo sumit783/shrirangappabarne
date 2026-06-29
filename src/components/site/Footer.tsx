@@ -14,7 +14,7 @@ const links: { href: string; key: Parameters<ReturnType<typeof useT>["t"]>[0] }[
 export function Footer() {
   const { t } = useT();
   return (
-    <footer className="bg-navy text-white pt-16 pb-8">
+    <footer className="bg-[#0d0b0a] text-white pt-16 pb-8">
       <div className="container-x grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-3">

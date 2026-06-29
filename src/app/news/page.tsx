@@ -197,7 +197,7 @@ export default function NewsPage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <section className="relative pt-32 pb-16 bg-gradient-to-br from-navy via-navy/95 to-navy-soft text-white overflow-hidden">
+      <section className="relative pt-32 pb-16 bg-[#0d0b0a] text-white overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-saffron/10 rounded-full blur-[100px] pointer-events-none -mr-40 -mt-40" />
 
         <div className="container-x relative z-10 text-center">

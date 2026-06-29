@@ -15,7 +15,7 @@ export default function MediaPage() {
       <Navbar />
 
       {/* Subpage Header Banner */}
-      <section className="relative pt-32 pb-16 bg-gradient-to-br from-navy via-navy/95 to-navy-soft text-white overflow-hidden">
+      <section className="relative pt-32 pb-16 bg-[#0d0b0a] text-white overflow-hidden">
         {/* Glow decoration */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-saffron/10 rounded-full blur-[100px] pointer-events-none -mr-40 -mt-40" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-gold/5 rounded-full blur-[80px] pointer-events-none -ml-20 -mb-20" />

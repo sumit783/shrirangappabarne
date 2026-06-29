@@ -12,6 +12,10 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 export function Contact() {
   const { t, lang } = useT();
   const items = offices[lang];
+  const [selectedOffice, setSelectedOffice] = useState(0);
+  const [zoom, setZoom] = useState(15);
+  const selected = items[selectedOffice];
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(selected.addr)}&z=${zoom}&output=embed`;
   const [form, setForm] = useState({ name: "", mobile: "", email: "", subject: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -63,41 +67,72 @@ export function Contact() {
         <p className="mt-4 text-muted-foreground">{t("contact.subtitle")}</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-        {items.map((o, i) => (
-          <motion.div
-            key={o.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="bg-card border rounded-2xl p-7 hover:border-saffron hover:shadow-elegant transition"
-          >
-            <h3 className="text-xl font-bold text-navy">{o.name}</h3>
-            <div className="mt-4 space-y-3 text-sm">
-              <p className="flex gap-3">
-                <MapPin className="h-5 w-5 text-saffron flex-shrink-0" />
-                {o.addr}
-              </p>
-              <p className="flex gap-3">
-                <Phone className="h-5 w-5 text-saffron flex-shrink-0" />
-                {o.phone}
-              </p>
-              <p className="flex gap-3">
-                <Mail className="h-5 w-5 text-saffron flex-shrink-0" />
-                {o.email}
-              </p>
+      <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-6 mt-12">
+        <div className="space-y-4">
+          <div className="grid sm:grid-cols-2 gap-4">
+            {items.map((o, i) => (
+              <button
+                key={o.name}
+                type="button"
+                onClick={() => {
+                  setSelectedOffice(i);
+                  setZoom(15);
+                }}
+                className={`rounded-3xl border p-5 text-left transition-shadow duration-200 ${
+                  selectedOffice === i
+                    ? "border-saffron bg-saffron/10 shadow-elegant"
+                    : "border-border bg-card hover:border-saffron hover:shadow-sm"
+                }`}
+              >
+                <h3 className="text-lg font-semibold text-navy">{o.name}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{o.addr}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] overflow-hidden border border-saffron/20 shadow-elegant bg-black/5">
+          <div className="relative h-[420px] min-h-[360px] w-full overflow-hidden">
+            <iframe
+              title="office-location"
+              src={mapSrc}
+              className="h-full w-full border-0"
+              allowFullScreen
+            />
+            <div className="absolute top-5 right-5 z-10 min-w-[18rem] rounded-3xl border border-saffron/20 bg-saffron/10 p-4 shadow-lg backdrop-blur-sm">
+              <p className="text-xs uppercase tracking-[0.24em] text-saffron font-bold">{t("contact.office")}</p>
+              <p className="mt-2 text-lg font-semibold text-navy">{selected.name}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{selected.addr}</p>
             </div>
+          </div>
+          <div className="flex flex-wrap gap-3 p-4 bg-card items-center">
+            <div className="inline-flex rounded-full bg-white/90 px-3 py-2 text-sm font-semibold text-navy shadow-sm">
+              Zoom {zoom}
+            </div>
+            <button
+              type="button"
+              onClick={() => setZoom((value) => Math.max(12, value - 1))}
+              className="rounded-full border border-saffron/30 bg-white/90 px-4 py-2 text-sm font-semibold text-navy transition hover:bg-saffron/10"
+            >
+              – Zoom Out
+            </button>
+            <button
+              type="button"
+              onClick={() => setZoom((value) => Math.min(18, value + 1))}
+              className="rounded-full border border-saffron/30 bg-white/90 px-4 py-2 text-sm font-semibold text-navy transition hover:bg-saffron/10"
+            >
+              + Zoom In
+            </button>
             <a
-              href={`https://maps.google.com/?q=${encodeURIComponent(o.addr)}`}
+              href={`https://maps.google.com/?q=${encodeURIComponent(selected.addr)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 text-saffron font-semibold text-sm hover:gap-3 transition-all"
+              className="ml-auto rounded-full border border-saffron bg-saffron/10 px-4 py-2 text-sm font-semibold text-saffron transition hover:bg-saffron/20"
             >
-              {t("contact.map")} →
+              {t("contact.openMap")}
             </a>
-          </motion.div>
-        ))}
+          </div>
+        </div>
       </div>
 
       <motion.form

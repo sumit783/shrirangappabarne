@@ -32,17 +32,27 @@ export function Books() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group perspective"
+              className="group"
             >
-              <div
-                className={`relative h-72 rounded-2xl bg-gradient-to-br ${covers[i]} p-6 flex flex-col justify-between text-white shadow-elegant overflow-hidden transition-transform group-hover:-rotate-2 group-hover:scale-105`}
-              >
-                <BookOpen className="h-8 w-8 opacity-70" />
-                <div>
-                  <h3 className="text-xl font-bold font-display leading-tight">{b.title}</h3>
-                  <p className="mt-2 text-sm opacity-90">{b.desc}</p>
+              <div className="relative overflow-hidden rounded-[32px] bg-white/5 border border-white/10 p-6 shadow-[0_30px_90px_-45px_rgba(251,146,60,0.35)] transition-transform duration-500 hover:-translate-y-1 hover:shadow-[0_30px_90px_-30px_rgba(251,146,60,0.45)]">
+                <div className={`absolute inset-x-0 top-0 h-24 bg-gradient-to-r ${covers[i]} opacity-90`} />
+                <div className="relative flex h-full flex-col justify-between gap-6 text-white">
+                  <div className="flex items-center justify-between">
+                    <div className="rounded-2xl bg-white/10 p-3 text-white shadow-sm">
+                      <BookOpen className="h-6 w-6" />
+                    </div>
+                    <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                      {t("books.book")}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold font-display leading-tight">{b.title}</h3>
+                    <p className="mt-3 text-sm text-white/80 leading-relaxed">{b.desc}</p>
+                  </div>
+                  <div className="rounded-3xl bg-black/20 px-4 py-3 text-sm text-white/80 ring-1 ring-white/10">
+                    {t("books.available")}
+                  </div>
                 </div>
-                <div className="absolute left-0 top-0 bottom-0 w-2 bg-black/20" />
               </div>
             </motion.div>
           ))}

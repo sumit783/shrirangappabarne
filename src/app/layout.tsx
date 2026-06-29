@@ -58,7 +58,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoDevanagari.variable} ${playfair.variable}`}>
+    <html lang="en" className={`light ${inter.variable} ${notoDevanagari.variable} ${playfair.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>
